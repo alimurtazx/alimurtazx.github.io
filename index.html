@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ali Murtaza | PORTFOLIO</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #050505;
+            background-image:
+                linear-gradient(#111 2px, transparent 2px),
+                linear-gradient(90deg, #111 2px, transparent 2px);
+            background-size: 30px 30px;
+            color: #ffffff;
+            font-family: 'VT323', monospace;
+            overflow: hidden;
+            user-select: none;
+            cursor: crosshair;
+        }
+
+        #pixel-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9000;
+            image-rendering: pixelated;
+        }
+
+        #scene {
+            width: 100vw;
+            height: 100vh;
+            perspective: 1200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        #carousel {
+            width: 320px;
+            height: 520px;
+            position: absolute;
+            transform-style: preserve-3d;
+            transition: transform 0.1s linear;
+        }
+
+        .media-card {
+            position: absolute;
+            width: 320px;
+            height: 520px;
+            left: 0;
+            top: 0;
+            transform-style: preserve-3d;
+        }
+
+        .ipod-body {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        .media-card:hover .ipod-body {
+            transform: translateY(-15px);
+        }
+
+        .face {
+            position: absolute;
+            box-sizing: border-box;
+            border: 4px solid #000;
+        }
+
+        .front {
+            width: 320px;
+            height: 520px;
+            background: #e0e0e0;
+            transform: translateZ(15px);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .back {
+            width: 320px;
+            height: 520px;
+            background: #b0b0b0;
+            transform: rotateY(180deg) translateZ(15px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-logo {
+            width: 50px;
+            height: 50px;
+            background: #000;
+            margin-bottom: 20px;
+            clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
+        }
+
+        .back-text {
+            color: #333;
+            text-align: center;
+            text-shadow: 1px 1px 0px rgba(255,255,255,0.4);
+        }
+
+        .back-text h2 { margin: 0; font-size: 1.8rem; letter-spacing: 2px; }
+        .back-text p { margin: 5px 0; font-size: 1.5rem; }
+        .back-text .details { font-size: 1.3rem; margin-top: 30px; opacity: 0.8; }
+        
+        .right { width: 30px; height: 520px; background: #999; left: 145px; top: 0; transform: rotateY(90deg) translateZ(160px); }
+        .left { width: 30px; height: 520px; background: #d0d0d0; left: 145px; top: 0; transform: rotateY(-90deg) translateZ(160px); }
+        .top { width: 320px; height: 30px; background: #e0e0e0; left: 0; top: 245px; transform: rotateX(90deg) translateZ(260px); }
+        .bottom { width: 320px; height: 30px; background: #777; left: 0; top: 245px; transform: rotateX(-90deg) translateZ(260px); }
+
+        .ipod-screen {
+            background: #000;
+            border: 4px solid #000;
+            height: 240px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: inset 4px 4px 8px rgba(0,0,0,0.8);
+            pointer-events: none;
+        }
+
+        .image-container {
+            width: 100%;
+            height: 195px;
+            background: #111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-container img, .image-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            image-rendering: pixelated;
+        }
+
+        .screen-text {
+            padding: 8px;
+            background: #000;
+            color: #fff;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .screen-text h3 {
+            margin: 0;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ipod-wheel-container {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .click-wheel {
+            width: 160px;
+            height: 160px;
+            background: #fff;
+            border: 4px solid #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .wheel-center {
+            width: 50px;
+            height: 50px;
+            background: #e0e0e0;
+            border: 4px solid #000;
+            border-radius: 50%;
+        }
+
+        .wheel-label { position: absolute; font-size: 1rem; color: #888; font-weight: bold; }
+        .label-top { top: 10px; } .label-bottom { bottom: 10px; } .label-left { left: 10px; } .label-right { right: 10px; }
+
+        /* --- UI OVERLAYS --- */
+        #controls-info {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            color: #00ff41;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 0px #000;
+            z-index: 100;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .nav-arrow {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 5rem;
+            color: #fff;
+            text-shadow: 4px 4px 0px #00ff41;
+            cursor: pointer;
+            z-index: 100;
+            padding: 20px;
+            opacity: 0.7;
+            transition: opacity 0.2s, transform 0.1s, color 0.2s;
+        }
+
+        .nav-arrow:hover {
+            opacity: 1;
+            color: #00ff41;
+            text-shadow: 4px 4px 0px #fff;
+        }
+
+        .nav-arrow:active {
+            transform: translateY(-50%) scale(0.9);
+        }
+
+        #left-arrow { left: 30px; }
+        #right-arrow { right: 30px; }
+        /* The keyframe animation for the click pop */
+        @keyframes arrowPop {
+            0% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-50%) scale(0.6); color: #fff; text-shadow: 0 0 20px #00ff41; }
+            100% { transform: translateY(-50%) scale(1); }
+        }
+
+        /* The class we will trigger via JavaScript */
+        .nav-arrow.pop {
+            animation: arrowPop 0.15s ease-out;
+        }
+
+        /* --- PIXELATED RETRO MAC MODAL --- */
+        #project-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        #project-modal.active { opacity: 1; pointer-events: all; }
+        #project-modal.active .modal-content { transform: scale(1); }
+
+        .modal-content {
+            background: #fff;
+            border: 4px solid #000;
+            box-shadow: 12px 12px 0px #00ff41;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transform: scale(0.1);
+            transition: transform 0.25s ease-out;
+        }
+
+        .modal-header {
+            background: #000;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid #000;
+        }
+
+        .modal-header h2 { margin: 0; font-size: 1.8rem; }
+
+        .close-btn {
+            background: #ff3300;
+            border: 4px solid #fff;
+            color: #fff;
+            font-family: 'VT323', monospace;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn:hover { background: #fff; color: #ff3300; border-color: #000; }
+
+        .modal-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            overflow-y: auto;
+            background: #f0f0f0;
+            color: #000;
+        }
+
+        .modal-main-media {
+            width: 100%;
+            background: #000;
+            border: 4px solid #000;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+        }
+
+        .modal-main-media img, .modal-main-media video {
+            width: 100%;
+            height: auto;
+            max-height: 50vh;
+            object-fit: contain;
+            image-rendering: auto;
+        }
+
+        .modal-text {
+            font-size: 1.3rem;
+            line-height: 1.4;
+            padding: 15px;
+            background: #fff;
+            border: 4px solid #000;
+        }
+        
+        .modal-text a { color: #ff3300; text-decoration: underline; }
+        .modal-text a:hover { color: #00ff41; background: #000; }
+        
+        #main-title {
+                    position: fixed;
+                    top: 40px;
+                    left: 0;
+                    width: 100vw;
+                    display: flex;
+                    justify-content: center;
+                    color: #00ff41;
+                    font-size: 1rem;
+                    letter-spacing: 6px;
+                    text-shadow: 4px 4px 0px #000;
+                    z-index: 100;
+                    pointer-events: none;
+                    opacity: 1;
+                    margin: 0;
+                }
+            </style>
+        </head>
+<body>
+    <div id="main-title">ALI MURTAZA // portfolio</div>
+    <canvas id="pixel-canvas"></canvas>
+    <div id="controls-info">USE LEFT + RIGHT KEYS TO ROTATE // CLICK iPOD TO SEE MORE</div>
+
+    <div id="left-arrow" class="nav-arrow">&lt;</div>
+    <div id="right-arrow" class="nav-arrow">&gt;</div>
+
+    <div id="scene">
+        <div id="carousel">
+            
+            <div class="media-card" data-fulltext="Visual Artist, 3D Environment Designer, and iOS Developer. Bridging my fine arts background (Pittura) with advanced technical frameworks. <br><br><b>Contact:</b> <a href='mailto:your.email@gmail.com'>Email Me</a><br><b>CV:</b> <a href='your-cv.pdf' target='_blank'>Download CV</a><br><b>GitHub:</b> <a href='https://github.com/yourusername' target='_blank'>View Code</a>">
+                <div class="ipod-body">
+                    <div class="face front">
+                        <div class="ipod-screen">
+                            <div class="image-container">
+                                <img src="ali-pic.jpg" alt="">
+                            </div>
+                            <div class="screen-text">
+                                <h3>PROFILE</h3>
+                            </div>
+                        </div>
+                        <div class="ipod-wheel-container">
+                            <div class="click-wheel">
+                                <span class="wheel-label label-top">MENU</span><span class="wheel-label label-bottom">&gt;||</span>
+                                <span class="wheel-label label-left">|&lt;&lt;</span><span class="wheel-label label-right">&gt;&gt;|</span>
+                                <div class="wheel-center"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="face back">
+                        <div class="back-logo"></div>
+                        <div class="back-text">
+                            <h2>PORTFOLIO</h2><p>VOL. 1</p>
+                            <p class="details">Designed by Ali Murtaza<br> // 2026</p>
+                        </div>
+                    </div>
+                    <div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div>
+                </div>
+            </div>
+
+            <div class="media-card" data-fulltext="Exploring environments through a technical lens. This low-poly volcanic crater model was created in Blender, focusing on optimizing topology for mobile performance while maintaining a strong geological aesthetic.">
+                <div class="ipod-body">
+                    <div class="face front">
+                        <div class="ipod-screen">
+                            <div class="image-container">
+                                <video src="volcano.mp4" autoplay loop muted playsinline></video>
+                            </div>
+                            <div class="screen-text">
+                                <h3>3D STUFF</h3>
+                            </div>
+                        </div>
+                        <div class="ipod-wheel-container">
+                            <div class="click-wheel">
+                                <span class="wheel-label label-top">MENU</span><span class="wheel-label label-bottom">&gt;||</span>
+                                <span class="wheel-label label-left">|&lt;&lt;</span><span class="wheel-label label-right">&gt;&gt;|</span>
+                                <div class="wheel-center"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="face back">
+                        <div class="back-logo"></div>
+                        <div class="back-text">
+                            <h2>PORTFOLIO</h2><p>VOL. 1</p>
+                            <p class="details">Designed by Ali Murtaza<br> // 2026</p>
+                        </div>
+                    </div>
+                    <div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div>
+                </div>
+            </div>
+
+            <div class="media-card" data-fulltext="Narrative concepts driven by expressive linear explorations. These designs utilize wobbly, hand-drawn vector lines and distorted proportions to create highly distinct, otherworldly figures.">
+                <div class="ipod-body">
+                    <div class="face front">
+                        <div class="ipod-screen">
+                            <div class="image-container"><img src="characterdesign.jpg" alt=""></div>
+                            <div class="screen-text">
+                                <h3>CHARACTER DESIGN</h3>
+                            </div>
+                        </div>
+                        <div class="ipod-wheel-container">
+                            <div class="click-wheel">
+                                <span class="wheel-label label-top">MENU</span><span class="wheel-label label-bottom">&gt;||</span>
+                                <span class="wheel-label label-left">|&lt;&lt;</span><span class="wheel-label label-right">&gt;&gt;|</span>
+                                <div class="wheel-center"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="face back">
+                        <div class="back-logo"></div>
+                        <div class="back-text">
+                            <h2>PORTFOLIO</h2><p>VOL. 1</p>
+                            <p class="details">Designed by Ali Murtaza<br> // 2026</p>
+                        </div>
+                    </div>
+                    <div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div>
+                </div>
+            </div>
+
+            <div class="media-card" data-fulltext="Augmented reality interactions bridging the gap between my 3D environments, 2D characters, and physical space. Utilizing frameworks like RealityKit to gamify educational concepts.">
+                <div class="ipod-body">
+                    <div class="face front">
+                        <div class="ipod-screen">
+                            <div class="image-container"><img src="ar.jpg" alt=""></div>
+                            <div class="screen-text">
+                                <h3>AR</h3>
+                            </div>
+                        </div>
+                        <div class="ipod-wheel-container">
+                            <div class="click-wheel">
+                                <span class="wheel-label label-top">MENU</span><span class="wheel-label label-bottom">&gt;||</span>
+                                <span class="wheel-label label-left">|&lt;&lt;</span><span class="wheel-label label-right">&gt;&gt;|</span>
+                                <div class="wheel-center"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="face back">
+                        <div class="back-logo"></div>
+                        <div class="back-text">
+                            <h2>PORTFOLIO</h2><p>VOL. 1</p>
+                            <p class="details">Designed by Ali Murtaza<br> // 2026</p>
+                        </div>
+                    </div>
+                    <div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div>
+                </div>
+            </div>
+
+            <div class="media-card" data-fulltext="For projects like Bug Buddies, I moved away from standard 3D assets to a highly expressive 2D drawing style. The icon and UI components reflect a hand-drawn approach.">
+                <div class="ipod-body">
+                    <div class="face front">
+                        <div class="ipod-screen">
+                            <div class="image-container"><img src="appicons.jpg" alt=""></div>
+                            <div class="screen-text">
+                                <h3>APP ICONS</h3>
+                            </div>
+                        </div>
+                        <div class="ipod-wheel-container">
+                            <div class="click-wheel">
+                                <span class="wheel-label label-top">MENU</span><span class="wheel-label label-bottom">&gt;||</span>
+                                <span class="wheel-label label-left">|&lt;&lt;</span><span class="wheel-label label-right">&gt;&gt;|</span>
+                                <div class="wheel-center"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="face back">
+                        <div class="back-logo"></div>
+                        <div class="back-text">
+                            <h2>PORTFOLIO</h2><p>VOL. 1</p>
+                            <p class="details">Designed by Ali Murtaza<br> // 2026</p>
+                        </div>
+                    </div>
+                    <div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div>
+                </div>
+            </div>
+
+            <div class="media-card" data-fulltext="Event branding and editorial design focusing heavily on typography and negative space. A strict minimalist aesthetic that completely omits background elements to command hierarchy.">
+                <div class="ipod-body">
+                    <div class="face front">
+                        <div class="ipod-screen">
+                            <div class="image-container"><img src="posters.jpg" alt=""></div>
+                            <div class="screen-text">
+                                <h3>POSTERS</h3>
+                            </div>
+                        </div>
+                        <div class="ipod-wheel-container">
+                            <div class="click-wheel">
+                                <span class="wheel-label label-top">MENU</span><span class="wheel-label label-bottom">&gt;||</span>
+                                <span class="wheel-label label-left">|&lt;&lt;</span><span class="wheel-label label-right">&gt;&gt;|</span>
+                                <div class="wheel-center"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="face back">
+                        <div class="back-logo"></div>
+                        <div class="back-text">
+                            <h2>PORTFOLIO</h2><p>VOL. 1</p>
+                            <p class="details">Designed by Ali Murtaza<br> // 2026</p>
+                        </div>
+                    </div>
+                    <div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div>
+                </div>
+            </div>
+
+            <div class="media-card" data-fulltext="The foundational work. Sketchbook archives, technical documentation, and the iterative workflows that inform both my digital UI design and traditional painting techniques.">
+                <div class="ipod-body">
+                    <div class="face front">
+                        <div class="ipod-screen">
+                            <div class="image-container"><img src="process.jpg" alt=""></div>
+                            <div class="screen-text">
+                                <h3>PROCESS</h3>
+                            </div>
+                        </div>
+                        <div class="ipod-wheel-container">
+                            <div class="click-wheel">
+                                <span class="wheel-label label-top">MENU</span><span class="wheel-label label-bottom">&gt;||</span>
+                                <span class="wheel-label label-left">|&lt;&lt;</span><span class="wheel-label label-right">&gt;&gt;|</span>
+                                <div class="wheel-center"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="face back">
+                        <div class="back-logo"></div>
+                        <div class="back-text">
+                            <h2>PORTFOLIO</h2><p>VOL. 1</p>
+                            <p class="details">Designed by Ali Murtaza<br> // 2026</p>
+                        </div>
+                    </div>
+                    <div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div>
+                </div>
+            </div>
+
+            <div class="media-card" data-fulltext="Sourced directly from my Masters in Pittura. These mixed-media explorations use wobbly, expressive lines, blending pop-art palettes with distorted figures to bridge the gap between fine art and modern digital aesthetics.">
+                <div class="ipod-body">
+                    <div class="face front">
+                        <div class="ipod-screen">
+                            <div class="image-container"><img src="traditional.jpg" alt=""></div>
+                            <div class="screen-text">
+                                <h3>TRADITIONAL STUFF</h3>
+                            </div>
+                        </div>
+                        <div class="ipod-wheel-container">
+                            <div class="click-wheel">
+                                <span class="wheel-label label-top">MENU</span><span class="wheel-label label-bottom">&gt;||</span>
+                                <span class="wheel-label label-left">|&lt;&lt;</span><span class="wheel-label label-right">&gt;&gt;|</span>
+                                <div class="wheel-center"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="face back">
+                        <div class="back-logo"></div>
+                        <div class="back-text">
+                            <h2>PORTFOLIO</h2><p>VOL. 1</p>
+                            <p class="details">Designed by Ali Murtaza<br> // 2026</p>
+                        </div>
+                    </div>
+                    <div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="project-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">SYS_DATA</h2>
+                <button class="close-btn" id="close-modal">X</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-main-media" id="modal-media-container"></div>
+                <div class="modal-text" id="modal-description"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. PIXEL MOUSE TRACKER & DUST PHYSICS ---
+        const canvas = document.getElementById('pixel-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let pixels = [];
+        let dust = [];
+        let mouseX = -1000;
+        let mouseY = -1000;
+        let lastMouseX = -1000;
+        let lastMouseY = -1000;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initDust();
+        }
+
+        // Initialize heavy dust count (400)
+        function initDust() {
+            dust = [];
+            for(let i = 0; i < 400; i++) {
+                dust.push({
+                    x: Math.random() * window.innerWidth,
+                    y: Math.random() * window.innerHeight,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    baseVx: (Math.random() - 0.5) * 0.5,
+                    baseVy: (Math.random() - 0.5) * 0.5,
+                    size: Math.random() * 3 + 1
+                });
+            }
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            if (lastMouseX === -1000) {
+                lastMouseX = mouseX;
+                lastMouseY = mouseY;
+            }
+
+            let dx = mouseX - lastMouseX;
+            let dy = mouseY - lastMouseY;
+            let dist = Math.sqrt(dx * dx + dy * dy);
+            
+            let spacing = 12;
+            
+            if (dist > spacing) {
+                let steps = Math.floor(dist / spacing);
+                for (let j = 1; j <= steps; j++) {
+                    let ratio = j / steps;
+                    pixels.push({
+                        x: lastMouseX + dx * ratio,
+                        y: lastMouseY + dy * ratio,
+                        life: 1.0,
+                        size: Math.random() * 2 + 1
+                    });
+                }
+                lastMouseX = mouseX;
+                lastMouseY = mouseY;
+            }
+        });
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // DRAW DUST PHYSICS
+            ctx.fillStyle = '#ffffff';
+            for(let i = 0; i < dust.length; i++) {
+                let d = dust[i];
+                
+                let dx = d.x - mouseX;
+                let dy = d.y - mouseY;
+                let dist = Math.sqrt(dx * dx + dy * dy);
+                
+                if (dist < 100) {
+                    let force = (100 - dist) / 100;
+                    d.vx += (dx / dist) * force * 0.5;
+                    d.vy += (dy / dist) * force * 0.5;
+                }
+
+                d.vx = d.vx * 0.92 + d.baseVx * 0.08;
+                d.vy = d.vy * 0.92 + d.baseVy * 0.08;
+
+                d.x += d.vx;
+                d.y += d.vy;
+
+                if(d.x < 0) d.x = canvas.width;
+                if(d.x > canvas.width) d.x = 0;
+                if(d.y < 0) d.y = canvas.height;
+                if(d.y > canvas.height) d.y = 0;
+
+                ctx.globalAlpha = 0.6;
+                ctx.fillRect(d.x, d.y, d.size, d.size);
+            }
+
+            // DRAW PIXEL TRAIL
+            ctx.fillStyle = '#00ff41';
+            for(let i = 0; i < pixels.length; i++) {
+                let p = pixels[i];
+                ctx.globalAlpha = p.life;
+                ctx.fillRect(p.x, p.y, p.size, p.size);
+                p.life -= 0.02;
+            }
+            pixels = pixels.filter(p => p.life > 0);
+            
+            ctx.globalAlpha = 1.0;
+            requestAnimationFrame(animateCanvas);
+        }
+        
+        resizeCanvas();
+        animateCanvas();
+
+
+        // --- 2. 3D ENGINE, MODAL, & ARROW UI LOGIC ---
+        const carousel = document.getElementById('carousel');
+        const cards = document.querySelectorAll('.media-card');
+        const modal = document.getElementById('project-modal');
+        const closeModalBtn = document.getElementById('close-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDesc = document.getElementById('modal-description');
+        const modalMedia = document.getElementById('modal-media-container');
+        
+        const leftArrow = document.getElementById('left-arrow');
+        const rightArrow = document.getElementById('right-arrow');
+
+        let isModalOpen = false;
+        const numberOfCards = cards.length;
+        const theta = 360 / numberOfCards;
+        const radius = Math.round((320 / 2) / Math.tan(Math.PI / numberOfCards)) + 550;
+
+        cards.forEach((card, index) => {
+            const angle = theta * index;
+            card.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
+            
+            card.addEventListener('click', () => {
+                if(Math.abs(dragDistance) > 5) return;
+
+                isModalOpen = true;
+                const title = card.querySelector('h3').innerText;
+                const fullText = card.getAttribute('data-fulltext');
+                const mediaHTML = card.querySelector('.image-container').innerHTML;
+
+                modalTitle.innerText = title + ".EXE";
+                modalDesc.innerHTML = fullText;
+                modalMedia.innerHTML = mediaHTML;
+                modal.classList.add('active');
+            });
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+            setTimeout(() => { isModalOpen = false; }, 200);
+        });
+
+        let currentRotation = 0;
+        let isDragging = false;
+        let startX = 0;
+        let dragDistance = 0;
+
+        function updateRotation() {
+            carousel.style.transition = 'transform 0.3s ease-out';
+            carousel.style.transform = `translateZ(${-radius}px) rotateY(${currentRotation}deg)`;
+        }
+        updateRotation();
+
+                                  // --- HELPER: Trigger the pop animation ---
+                                  function animateArrow(arrowElement) {
+                                      // Remove class to reset the animation if clicked rapidly
+                                      arrowElement.classList.remove('pop');
+                                      // Trigger a reflow to restart the CSS animation
+                                      void arrowElement.offsetWidth;
+                                      // Apply the animation class
+                                      arrowElement.classList.add('pop');
+                                  }
+
+                                  // Arrow Button Logic
+                                  leftArrow.addEventListener('click', () => {
+                                      if (isModalOpen) return;
+                                      animateArrow(leftArrow); // Trigger visual click
+                                      currentRotation += theta;
+                                      updateRotation();
+                                  });
+
+                                  rightArrow.addEventListener('click', () => {
+                                      if (isModalOpen) return;
+                                      animateArrow(rightArrow); // Trigger visual click
+                                      currentRotation -= theta;
+                                      updateRotation();
+                                  });
+
+                                  // Keyboard Logic
+                                  window.addEventListener('keydown', (e) => {
+                                      if (isModalOpen) return;
+                                      
+                                      if (e.key === 'ArrowRight') {
+                                          animateArrow(rightArrow); // Visually click the UI arrow
+                                          currentRotation -= theta / 2;
+                                      }
+                                      else if (e.key === 'ArrowLeft') {
+                                          animateArrow(leftArrow); // Visually click the UI arrow
+                                          currentRotation += theta / 2;
+                                      }
+                                      updateRotation();
+                                  });
+
+        // Drag Logic
+        window.addEventListener('mousedown', (e) => {
+            if (isModalOpen) return;
+            isDragging = true; dragDistance = 0; startX = e.clientX;
+            carousel.style.transition = 'none';
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging || isModalOpen) return;
+            const deltaX = e.clientX - startX;
+            dragDistance += deltaX; currentRotation += deltaX * 0.2;
+            startX = e.clientX;
+            carousel.style.transform = `translateZ(${-radius}px) rotateY(${currentRotation}deg)`;
+        });
+
+        window.addEventListener('mouseup', () => {
+            if (!isDragging) return;
+            isDragging = false;
+            updateRotation();
+        });
+
+        // Touch Logic
+        window.addEventListener('touchstart', (e) => {
+            if (isModalOpen) return;
+            isDragging = true; dragDistance = 0; startX = e.touches[0].clientX;
+            carousel.style.transition = 'none';
+        });
+
+        window.addEventListener('touchmove', (e) => {
+            if (!isDragging || isModalOpen) return;
+            const deltaX = e.touches[0].clientX - startX;
+            dragDistance += deltaX; currentRotation += deltaX * 0.4;
+            startX = e.touches[0].clientX;
+            carousel.style.transform = `translateZ(${-radius}px) rotateY(${currentRotation}deg)`;
+        });
+
+        window.addEventListener('touchend', () => {
+            if (!isDragging) return;
+            isDragging = false;
+            updateRotation();
+        });
+
+    </script>
+</body>
+</html>
