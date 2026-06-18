@@ -146,12 +146,34 @@
             justify-content: center;
         }
 
-        .image-container img, .image-container video {
+        /* Keep the videos (like your volcano) filling the screen */
+        .image-container video {
             width: 100%;
             height: 100%;
             object-fit: cover;
             image-rendering: pixelated;
         }
+
+        /* Force the icons to shrink, fit, and show their boxes */
+        .image-container img.pixelated-icon {
+            width: 85% !important;
+            height: 85% !important;
+            object-fit: contain !important; /* Forces it to NOT crop */
+            image-rendering: pixelated;
+            padding: 10px;
+            box-sizing: border-box;
+            background: #050505;
+        }
+
+        /* --- THE DYNAMIC COLORED BOXES --- */
+        img.box-blue { border: 2px solid #0088ff !important; box-shadow: 0 0 10px rgba(0, 136, 255, 0.6) !important; }
+        img.box-orange { border: 2px solid #ff5500 !important; box-shadow: 0 0 10px rgba(255, 85, 0, 0.6) !important; }
+        img.box-yellow { border: 2px solid #ffcc00 !important; box-shadow: 0 0 10px rgba(255, 204, 0, 0.6) !important; }
+        img.box-green { border: 2px solid #00ff41 !important; box-shadow: 0 0 10px rgba(0, 255, 65, 0.6) !important; }
+        img.box-pink { border: 2px solid #ff00aa !important; box-shadow: 0 0 10px rgba(255, 0, 170, 0.6) !important; }
+        img.box-red { border: 2px solid #ff2222 !important; box-shadow: 0 0 10px rgba(255, 34, 34, 0.6) !important; }
+        img.box-cyan { border: 2px solid #00ffff !important; box-shadow: 0 0 10px rgba(0, 255, 255, 0.6) !important; }
+        img.box-purple { border: 2px solid #aa00ff !important; box-shadow: 0 0 10px rgba(170, 0, 255, 0.6) !important; }
 
         .screen-text {
             padding: 8px;
@@ -388,7 +410,7 @@
                     <div class="face front">
                         <div class="ipod-screen">
                             <div class="image-container">
-                                <img src="ali-pic.jpg" alt="">
+                                <img src="icon-profile.jpg" alt="" class="pixelated-icon box-blue">
                             </div>
                             <div class="screen-text">
                                 <h3>PROFILE</h3>
@@ -418,7 +440,7 @@
                     <div class="face front">
                         <div class="ipod-screen">
                             <div class="image-container">
-                                <video src="volcano.mp4" autoplay loop muted playsinline></video>
+                                <img src="icon-3d.jpg" alt="" class="pixelated-icon box-orange">
                             </div>
                             <div class="screen-text">
                                 <h3>3D STUFF</h3>
@@ -447,7 +469,8 @@
                 <div class="ipod-body">
                     <div class="face front">
                         <div class="ipod-screen">
-                            <div class="image-container"><img src="characterdesign.jpg" alt=""></div>
+                            <div class="image-container"><img <img src="icon-character.jpg" alt="" class="pixelated-icon box-yellow">
+                            </div>
                             <div class="screen-text">
                                 <h3>CHARACTER DESIGN</h3>
                             </div>
@@ -475,7 +498,8 @@
                 <div class="ipod-body">
                     <div class="face front">
                         <div class="ipod-screen">
-                            <div class="image-container"><img src="ar.jpg" alt=""></div>
+                            <div class="image-container"><img src="icon-ar.jpg" alt="" class="pixelated-icon box-green">
+                            </div>
                             <div class="screen-text">
                                 <h3>AR</h3>
                             </div>
@@ -503,7 +527,8 @@
                 <div class="ipod-body">
                     <div class="face front">
                         <div class="ipod-screen">
-                            <div class="image-container"><img src="appicons.jpg" alt=""></div>
+                            <div class="image-container"><img src="icon-bug.jpg" alt="" class="pixelated-icon box-pink">
+                            </div>
                             <div class="screen-text">
                                 <h3>APP ICONS</h3>
                             </div>
@@ -531,7 +556,8 @@
                 <div class="ipod-body">
                     <div class="face front">
                         <div class="ipod-screen">
-                            <div class="image-container"><img src="posters.jpg" alt=""></div>
+                            <div class="image-container"><img src="icon-posters.jpg" alt="" class="pixelated-icon box-red">
+                            </div>
                             <div class="screen-text">
                                 <h3>POSTERS</h3>
                             </div>
@@ -559,7 +585,8 @@
                 <div class="ipod-body">
                     <div class="face front">
                         <div class="ipod-screen">
-                            <div class="image-container"><img src="process.jpg" alt=""></div>
+                            <div class="image-container"><img src="icon-process.jpg" alt="" class="pixelated-icon box-cyan">
+                            </div>
                             <div class="screen-text">
                                 <h3>PROCESS</h3>
                             </div>
@@ -587,7 +614,8 @@
                 <div class="ipod-body">
                     <div class="face front">
                         <div class="ipod-screen">
-                            <div class="image-container"><img src="traditional.jpg" alt=""></div>
+                            <div class="image-container"><img src="icon-traditional.jpg" alt="" class="pixelated-icon box-purple">
+                            </div>
                             <div class="screen-text">
                                 <h3>TRADITIONAL STUFF</h3>
                             </div>
