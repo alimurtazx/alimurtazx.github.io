@@ -436,6 +436,13 @@
                     max-width: 90%;
                     line-height: 1.4;
                 }
+        /* Special size control just for the profile picture */
+        img.profile-pic {
+            width: 300px !important; /* Change this number to make it bigger or smaller! */
+            height: auto !important;
+            border: 2px solid #00ff41 !important; /* Adds a nice retro green border to your photo */
+            margin: 0 auto; /* Keeps it perfectly centered */
+        }
             </style>
         </head>
 <body>
@@ -450,11 +457,13 @@
         <div id="carousel">
             
             <!-- CARD 1: PROFILE -->
-            <div class="media-card" data-fulltext="Visual Artist, 3D Environment Designer, and iOS Developer. Bridging my fine arts background (Pittura) with advanced technical frameworks. <br><br><b>Contact:</b> <a href='mailto:your.email@gmail.com'>Email Me</a><br><b>CV:</b> <a href='your-cv.pdf' target='_blank'>Download CV</a><br><b>GitHub:</b> <a href='https://github.com/yourusername' target='_blank'>View Code</a>">
+            <div class="media-card" data-fulltext="Multiisciplinary artist/designer - passionate about 3d modelling + animation, game design and other weirdly cool stuff.  <br><br><b>Contact:</b> <a href='mailto: alixmurtazx@gmail.com'>Email Me</a><br><b>CV:</b> <a href='CV2026 - Ali Murtaza.pdf' target='_blank'>Download CV</a><br><b>Instagram:</b> <a href='https://instagram.com/ali_murtazaa' target='_blank'>Get in touch!</a>">
                 
                 <!-- HIDDEN PORTFOLIO PICTURES: Change 'ali-pic.jpg' to your real photo -->
                 <div class="gallery-assets" style="display: none;">
-                    <img src="ali-pic.jpg" alt="Ali Murtaza">
+                    <div class="work-item">
+                        <img src="ali pic.png" alt="Ali Murtaza" class="profile-pic">
+                    </div>
                 </div>
                 
                 <div class="ipod-body">
@@ -479,20 +488,25 @@
             </div>
             
             <!-- CARD 2: 3D STUFF -->
-            <div class="media-card" data-fulltext="Exploring environments through a technical lens...">
+            <div class="media-card" data-fulltext="More 3d stuff coming soon...">
                 
                 <div class="gallery-assets" style="display: none;">
                     
                     <div class="work-item">
-                        <h4 class="work-title">Low-Poly Volcanic Crater</h4>
-                        <video src="volcano.mp4" autoplay loop muted playsinline></video>
-                        <p class="work-desc">Generated geological elevation maps in Blender, optimized for mobile.</p>
+                        <h4 class="work-title"> WWF Astroni Oasis, Napoli, Italy</h4>
+                        <video src="3D Map Astroni.mp4" autoplay loop muted playsinline></video>
+                        <p class="work-desc">Created 3d model using Blender for a project under WWF, of a site called 'Astroni Oasis' in the last chellenge at Apple Developer Academy in Napoli, Italy</p>
                     </div>
 
                     <div class="work-item">
                         <h4 class="work-title">Topology & Wireframe</h4>
-                        <img src="wireframe.jpg" alt="Wireframe view">
-                        <p class="work-desc">A breakdown of the polygon flow before texturing.</p>
+                        <img src="map wireframe.png" alt="Wireframe view">
+                        <p class="work-desc">A breakdown of the structure before texturing.</p>
+                    </div>
+                    <div class="work-item">
+                        <h4 class="work-title"> The floor is literally lava </h4>
+                        <video src="lava.mp4" autoplay loop muted playsinline></video>
+                        <p class="work-desc">Created this 3D Animation in Blender for the same project to enhance the user experience. </p>
                     </div>
 
                 </div>
