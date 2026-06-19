@@ -44,6 +44,7 @@
             justify-content: center;
             position: relative;
             transform-style: preserve-3d;
+            transform: scale(0.75); 
         }
 
         #carousel {
@@ -279,12 +280,12 @@
         /* --- PIXELATED RETRO MAC MODAL --- */
         #project-modal {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 9999;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(0, 0, 0, 0.9); /* Made background slightly darker */
+            z-index: 999999 !important; /* Forces it to the very top */
+            transform: translateZ(2000px); /* Pushes it out of the 3D space towards the user */
+            /* ... keep your other existing rules for it ... */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -350,11 +351,23 @@
 
         .modal-main-media {
             width: 100%;
-            background: #000;
+            background: #111;
             border: 4px solid #000;
-            overflow: hidden;
             display: flex;
-            justify-content: center;
+            flex-direction: column; /* This stacks your work vertically */
+            align-items: center;
+            gap: 20px; /* Space between multiple pictures */
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .modal-main-media img, .modal-main-media video {
+            width: 100%;
+            height: auto;
+            max-height: none; /* Lets the full image show without squishing */
+            object-fit: contain;
+            border: 2px solid #00ff41; /* Puts a clean green border around your real work */
+        }
         }
 
         .modal-main-media img, .modal-main-media video {
@@ -392,6 +405,36 @@
                     opacity: 1;
                     margin: 0;
                 }
+        /* --- SCROLLING GALLERY STYLES --- */
+                .work-item {
+                    width: 100%;
+                    margin-bottom: 50px; /* Space between each project piece */
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .work-title {
+                    color: #00ff41;
+                    font-size: 1.5rem;
+                    margin: 0 0 15px 0;
+                    text-transform: uppercase;
+                    letter-spacing: 2px;
+                    text-align: center;
+                    background: #000;
+                    padding: 5px 15px;
+                    border: 2px solid #00ff41;
+                    box-shadow: 4px 4px 0px #000;
+                }
+
+                .work-desc {
+                    color: #ccc; /* Slightly dimmed white so the title stands out */
+                    font-size: 1.2rem;
+                    text-align: center;
+                    margin: 15px 0 0 0;
+                    max-width: 90%;
+                    line-height: 1.4;
+                }
             </style>
         </head>
 <body>
@@ -405,16 +448,21 @@
     <div id="scene">
         <div id="carousel">
             
+            <!-- CARD 1: PROFILE -->
             <div class="media-card" data-fulltext="Visual Artist, 3D Environment Designer, and iOS Developer. Bridging my fine arts background (Pittura) with advanced technical frameworks. <br><br><b>Contact:</b> <a href='mailto:your.email@gmail.com'>Email Me</a><br><b>CV:</b> <a href='your-cv.pdf' target='_blank'>Download CV</a><br><b>GitHub:</b> <a href='https://github.com/yourusername' target='_blank'>View Code</a>">
+                
+                <!-- HIDDEN PORTFOLIO PICTURES: Change 'ali-pic.jpg' to your real photo -->
+                <div class="gallery-assets" style="display: none;">
+                    <img src="ali-pic.jpg" alt="Ali Murtaza">
+                </div>
+                
                 <div class="ipod-body">
                     <div class="face front">
                         <div class="ipod-screen">
                             <div class="image-container">
                                 <img src="icon-profile.jpg" alt="" class="pixelated-icon box-blue">
                             </div>
-                            <div class="screen-text">
-                                <h3>PROFILE</h3>
-                            </div>
+                            <div class="screen-text"><h3>PROFILE</h3></div>
                         </div>
                         <div class="ipod-wheel-container">
                             <div class="click-wheel">
@@ -424,27 +472,36 @@
                             </div>
                         </div>
                     </div>
-                    <div class="face back">
-                        <div class="back-logo"></div>
-                        <div class="back-text">
-                            <h2>PORTFOLIO</h2><p>VOL. 1</p>
-                            <p class="details">Designed by Ali Murtaza<br> // 2026</p>
-                        </div>
-                    </div>
+                    <div class="face back"><div class="back-logo"></div><div class="back-text"><h2>PORTFOLIO</h2><p>VOL. 1</p><p class="details">Designed by Ali Murtaza<br> // 2026</p></div></div>
                     <div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div>
                 </div>
             </div>
+            
+            <!-- CARD 2: 3D STUFF -->
+            <div class="media-card" data-fulltext="Exploring environments through a technical lens...">
+                
+                <div class="gallery-assets" style="display: none;">
+                    
+                    <div class="work-item">
+                        <h4 class="work-title">Low-Poly Volcanic Crater</h4>
+                        <video src="volcano.mp4" autoplay loop muted playsinline></video>
+                        <p class="work-desc">Generated geological elevation maps in Blender, optimized for mobile.</p>
+                    </div>
 
-            <div class="media-card" data-fulltext="Exploring environments through a technical lens. This low-poly volcanic crater model was created in Blender, focusing on optimizing topology for mobile performance while maintaining a strong geological aesthetic.">
+                    <div class="work-item">
+                        <h4 class="work-title">Topology & Wireframe</h4>
+                        <img src="wireframe.jpg" alt="Wireframe view">
+                        <p class="work-desc">A breakdown of the polygon flow before texturing.</p>
+                    </div>
+
+                </div>
                 <div class="ipod-body">
                     <div class="face front">
                         <div class="ipod-screen">
                             <div class="image-container">
                                 <img src="icon-3d.jpg" alt="" class="pixelated-icon box-orange">
                             </div>
-                            <div class="screen-text">
-                                <h3>3D STUFF</h3>
-                            </div>
+                            <div class="screen-text"><h3>3D STUFF</h3></div>
                         </div>
                         <div class="ipod-wheel-container">
                             <div class="click-wheel">
@@ -454,26 +511,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="face back">
-                        <div class="back-logo"></div>
-                        <div class="back-text">
-                            <h2>PORTFOLIO</h2><p>VOL. 1</p>
-                            <p class="details">Designed by Ali Murtaza<br> // 2026</p>
-                        </div>
-                    </div>
+                    <div class="face back"><div class="back-logo"></div><div class="back-text"><h2>PORTFOLIO</h2><p>VOL. 1</p><p class="details">Designed by Ali Murtaza<br> // 2026</p></div></div>
                     <div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div>
                 </div>
             </div>
-
+            
+            <!-- CARD 3: CHARACTER DESIGN -->
             <div class="media-card" data-fulltext="Narrative concepts driven by expressive linear explorations. These designs utilize wobbly, hand-drawn vector lines and distorted proportions to create highly distinct, otherworldly figures.">
+                
+                <!-- HIDDEN PORTFOLIO PICTURES: Put your character designs here -->
+                <div class="gallery-assets" style="display: none;">
+                    <img src="characterdesign.jpg" alt="Character Sketch">
+                </div>
+                
                 <div class="ipod-body">
                     <div class="face front">
                         <div class="ipod-screen">
-                            <div class="image-container"><img <img src="icon-character.jpg" alt="" class="pixelated-icon box-yellow">
+                            <div class="image-container">
+                                <img src="icon-character.jpg" alt="" class="pixelated-icon box-yellow">
                             </div>
-                            <div class="screen-text">
-                                <h3>CHARACTER DESIGN</h3>
-                            </div>
+                            <div class="screen-text"><h3>CHARACTER DESIGN</h3></div>
                         </div>
                         <div class="ipod-wheel-container">
                             <div class="click-wheel">
@@ -483,26 +540,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="face back">
-                        <div class="back-logo"></div>
-                        <div class="back-text">
-                            <h2>PORTFOLIO</h2><p>VOL. 1</p>
-                            <p class="details">Designed by Ali Murtaza<br> // 2026</p>
-                        </div>
-                    </div>
+                    <div class="face back"><div class="back-logo"></div><div class="back-text"><h2>PORTFOLIO</h2><p>VOL. 1</p><p class="details">Designed by Ali Murtaza<br> // 2026</p></div></div>
                     <div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div>
                 </div>
             </div>
-
+            
+            <!-- CARD 4: AR -->
             <div class="media-card" data-fulltext="Augmented reality interactions bridging the gap between my 3D environments, 2D characters, and physical space. Utilizing frameworks like RealityKit to gamify educational concepts.">
+                
+                <!-- HIDDEN PORTFOLIO PICTURES: Put your RealityKit/AR videos and screenshots here -->
+                <div class="gallery-assets" style="display: none;">
+                    <img src="ar.jpg" alt="AR Demo">
+                </div>
+                
                 <div class="ipod-body">
                     <div class="face front">
                         <div class="ipod-screen">
-                            <div class="image-container"><img src="icon-ar.jpg" alt="" class="pixelated-icon box-green">
+                            <div class="image-container">
+                                <img src="icon-ar.jpg" alt="" class="pixelated-icon box-green">
                             </div>
-                            <div class="screen-text">
-                                <h3>AR</h3>
-                            </div>
+                            <div class="screen-text"><h3>AR</h3></div>
                         </div>
                         <div class="ipod-wheel-container">
                             <div class="click-wheel">
@@ -512,26 +569,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="face back">
-                        <div class="back-logo"></div>
-                        <div class="back-text">
-                            <h2>PORTFOLIO</h2><p>VOL. 1</p>
-                            <p class="details">Designed by Ali Murtaza<br> // 2026</p>
-                        </div>
-                    </div>
+                    <div class="face back"><div class="back-logo"></div><div class="back-text"><h2>PORTFOLIO</h2><p>VOL. 1</p><p class="details">Designed by Ali Murtaza<br> // 2026</p></div></div>
                     <div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div>
                 </div>
             </div>
-
+            
+            <!-- CARD 5: APP ICONS -->
             <div class="media-card" data-fulltext="For projects like Bug Buddies, I moved away from standard 3D assets to a highly expressive 2D drawing style. The icon and UI components reflect a hand-drawn approach.">
+                
+                <!-- HIDDEN PORTFOLIO PICTURES: Put your app UI and 2D Bug Buddies icons here -->
+                <div class="gallery-assets" style="display: none;">
+                    <img src="appicons.jpg" alt="App Icons UI">
+                </div>
+                
                 <div class="ipod-body">
                     <div class="face front">
                         <div class="ipod-screen">
-                            <div class="image-container"><img src="icon-bug.jpg" alt="" class="pixelated-icon box-pink">
+                            <div class="image-container">
+                                <img src="icon-bug.jpg" alt="" class="pixelated-icon box-pink">
                             </div>
-                            <div class="screen-text">
-                                <h3>APP ICONS</h3>
-                            </div>
+                            <div class="screen-text"><h3>APP ICONS</h3></div>
                         </div>
                         <div class="ipod-wheel-container">
                             <div class="click-wheel">
@@ -541,26 +598,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="face back">
-                        <div class="back-logo"></div>
-                        <div class="back-text">
-                            <h2>PORTFOLIO</h2><p>VOL. 1</p>
-                            <p class="details">Designed by Ali Murtaza<br> // 2026</p>
-                        </div>
-                    </div>
+                    <div class="face back"><div class="back-logo"></div><div class="back-text"><h2>PORTFOLIO</h2><p>VOL. 1</p><p class="details">Designed by Ali Murtaza<br> // 2026</p></div></div>
                     <div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div>
                 </div>
             </div>
-
+            
+            <!-- CARD 6: POSTERS -->
             <div class="media-card" data-fulltext="Event branding and editorial design focusing heavily on typography and negative space. A strict minimalist aesthetic that completely omits background elements to command hierarchy.">
+                
+                <!-- HIDDEN PORTFOLIO PICTURES: Put your minimalist posters here -->
+                <div class="gallery-assets" style="display: none;">
+                    <img src="posters.jpg" alt="Poster Design">
+                </div>
+                
                 <div class="ipod-body">
                     <div class="face front">
                         <div class="ipod-screen">
-                            <div class="image-container"><img src="icon-posters.jpg" alt="" class="pixelated-icon box-red">
+                            <div class="image-container">
+                                <img src="icon-posters.jpg" alt="" class="pixelated-icon box-red">
                             </div>
-                            <div class="screen-text">
-                                <h3>POSTERS</h3>
-                            </div>
+                            <div class="screen-text"><h3>POSTERS</h3></div>
                         </div>
                         <div class="ipod-wheel-container">
                             <div class="click-wheel">
@@ -570,26 +627,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="face back">
-                        <div class="back-logo"></div>
-                        <div class="back-text">
-                            <h2>PORTFOLIO</h2><p>VOL. 1</p>
-                            <p class="details">Designed by Ali Murtaza<br> // 2026</p>
-                        </div>
-                    </div>
+                    <div class="face back"><div class="back-logo"></div><div class="back-text"><h2>PORTFOLIO</h2><p>VOL. 1</p><p class="details">Designed by Ali Murtaza<br> // 2026</p></div></div>
                     <div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div>
                 </div>
             </div>
-
+            
+            <!-- CARD 7: PROCESS -->
             <div class="media-card" data-fulltext="The foundational work. Sketchbook archives, technical documentation, and the iterative workflows that inform both my digital UI design and traditional painting techniques.">
+                
+                <!-- HIDDEN PORTFOLIO PICTURES: Put your workflow, behind-the-scenes, or code snippets here -->
+                <div class="gallery-assets" style="display: none;">
+                    <img src="process.jpg" alt="Workflow and Process">
+                </div>
+                
                 <div class="ipod-body">
                     <div class="face front">
                         <div class="ipod-screen">
-                            <div class="image-container"><img src="icon-process.jpg" alt="" class="pixelated-icon box-cyan">
+                            <div class="image-container">
+                                <img src="icon-process.jpg" alt="" class="pixelated-icon box-cyan">
                             </div>
-                            <div class="screen-text">
-                                <h3>PROCESS</h3>
-                            </div>
+                            <div class="screen-text"><h3>PROCESS</h3></div>
                         </div>
                         <div class="ipod-wheel-container">
                             <div class="click-wheel">
@@ -599,26 +656,26 @@
                             </div>
                         </div>
                     </div>
-                    <div class="face back">
-                        <div class="back-logo"></div>
-                        <div class="back-text">
-                            <h2>PORTFOLIO</h2><p>VOL. 1</p>
-                            <p class="details">Designed by Ali Murtaza<br> // 2026</p>
-                        </div>
-                    </div>
+                    <div class="face back"><div class="back-logo"></div><div class="back-text"><h2>PORTFOLIO</h2><p>VOL. 1</p><p class="details">Designed by Ali Murtaza<br> // 2026</p></div></div>
                     <div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div>
                 </div>
             </div>
-
+            
+            <!-- CARD 8: TRADITIONAL STUFF -->
             <div class="media-card" data-fulltext="Sourced directly from my Masters in Pittura. These mixed-media explorations use wobbly, expressive lines, blending pop-art palettes with distorted figures to bridge the gap between fine art and modern digital aesthetics.">
+                
+                <!-- HIDDEN PORTFOLIO PICTURES: Put photos of your physical mixed-media paintings here -->
+                <div class="gallery-assets" style="display: none;">
+                    <img src="traditional.jpg" alt="Masters in Pittura Paintings">
+                </div>
+                
                 <div class="ipod-body">
                     <div class="face front">
                         <div class="ipod-screen">
-                            <div class="image-container"><img src="icon-traditional.jpg" alt="" class="pixelated-icon box-purple">
+                            <div class="image-container">
+                                <img src="icon-traditional.jpg" alt="" class="pixelated-icon box-purple">
                             </div>
-                            <div class="screen-text">
-                                <h3>TRADITIONAL STUFF</h3>
-                            </div>
+                            <div class="screen-text"><h3>TRADITIONAL STUFF</h3></div>
                         </div>
                         <div class="ipod-wheel-container">
                             <div class="click-wheel">
@@ -628,20 +685,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="face back">
-                        <div class="back-logo"></div>
-                        <div class="back-text">
-                            <h2>PORTFOLIO</h2><p>VOL. 1</p>
-                            <p class="details">Designed by Ali Murtaza<br> // 2026</p>
-                        </div>
-                    </div>
+                    <div class="face back"><div class="back-logo"></div><div class="back-text"><h2>PORTFOLIO</h2><p>VOL. 1</p><p class="details">Designed by Ali Murtaza<br> // 2026</p></div></div>
                     <div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div>
                 </div>
             </div>
-
-        </div>
-    </div>
-
+        </div></div>
     <div id="project-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -676,7 +724,7 @@
         // Initialize heavy dust count (400)
         function initDust() {
             dust = [];
-            for(let i = 0; i < 400; i++) {
+            for(let i = 0; i < 5000; i++) {
                 dust.push({
                     x: Math.random() * window.innerWidth,
                     y: Math.random() * window.innerHeight,
@@ -684,7 +732,7 @@
                     vy: (Math.random() - 0.5) * 0.5,
                     baseVx: (Math.random() - 0.5) * 0.5,
                     baseVy: (Math.random() - 0.5) * 0.5,
-                    size: Math.random() * 3 + 1
+                    size: Math.random() * 1 + 0.2
                 });
             }
         }
@@ -790,24 +838,32 @@
         const theta = 360 / numberOfCards;
         const radius = Math.round((320 / 2) / Math.tan(Math.PI / numberOfCards)) + 550;
 
-        cards.forEach((card, index) => {
-            const angle = theta * index;
-            card.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
-            
-            card.addEventListener('click', () => {
-                if(Math.abs(dragDistance) > 5) return;
+                                  cards.forEach((card, index) => {
+                                      const angle = theta * index;
+                                      card.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
+                                      
+                                      card.addEventListener('click', () => {
+                                          if(Math.abs(dragDistance) > 5) return;
 
-                isModalOpen = true;
-                const title = card.querySelector('h3').innerText;
-                const fullText = card.getAttribute('data-fulltext');
-                const mediaHTML = card.querySelector('.image-container').innerHTML;
+                                          isModalOpen = true;
+                                          const title = card.querySelector('h3').innerText;
+                                          const fullText = card.getAttribute('data-fulltext');
+                                          
+                                          // Look for the hidden gallery we just made
+                                          const galleryElement = card.querySelector('.gallery-assets');
+                                          
+                                          // If the gallery exists, use it! Otherwise, fallback to the icon.
+                                          const mediaHTML = galleryElement ? galleryElement.innerHTML : card.querySelector('.image-container').innerHTML;
 
-                modalTitle.innerText = title + ".EXE";
-                modalDesc.innerHTML = fullText;
-                modalMedia.innerHTML = mediaHTML;
-                modal.classList.add('active');
-            });
-        });
+                                          modalTitle.innerText = title + ".EXE";
+                                          modalDesc.innerHTML = fullText;
+                                          
+                                          // Inject the gallery into the pop-up
+                                          modalMedia.innerHTML = mediaHTML;
+                                          
+                                          modal.classList.add('active');
+                                      });
+                                  });
 
         closeModalBtn.addEventListener('click', () => {
             modal.classList.remove('active');
