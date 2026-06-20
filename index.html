@@ -27,22 +27,15 @@
 
         #pixel-canvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 0;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none; z-index: 0;
             image-rendering: pixelated;
         }
 
         #scene {
-            width: 100vw;
-            height: 100vh;
+            width: 100vw; height: 100vh;
             perspective: 1200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             position: relative;
             transform-style: preserve-3d;
             transform: scale(0.75);
@@ -50,8 +43,7 @@
         }
 
         #carousel {
-            width: 320px;
-            height: 520px;
+            width: 320px; height: 520px;
             position: absolute;
             transform-style: preserve-3d;
             transition: transform 0.1s linear;
@@ -59,67 +51,42 @@
 
         .media-card {
             position: absolute;
-            width: 320px;
-            height: 520px;
-            left: 0;
-            top: 0;
+            width: 320px; height: 520px;
+            left: 0; top: 0;
             transform-style: preserve-3d;
         }
 
         .ipod-body {
             position: relative;
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             transform-style: preserve-3d;
             transition: transform 0.2s;
             cursor: pointer;
         }
 
-        .media-card:hover .ipod-body {
-            transform: translateY(-15px);
-        }
+        .media-card:hover .ipod-body { transform: translateY(-15px); }
 
         .face {
-            position: absolute;
-            box-sizing: border-box;
-            border: 4px solid #000;
+            position: absolute; box-sizing: border-box; border: 4px solid #000;
         }
 
         .front {
-            width: 320px;
-            height: 520px;
-            background: #e0e0e0;
-            transform: translateZ(15px);
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
+            width: 320px; height: 520px; background: #e0e0e0;
+            transform: translateZ(15px); padding: 15px; display: flex; flex-direction: column;
         }
 
         .back {
-            width: 320px;
-            height: 520px;
-            background: #b0b0b0;
+            width: 320px; height: 520px; background: #b0b0b0;
             transform: rotateY(180deg) translateZ(15px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
 
         .back-logo {
-            width: 50px;
-            height: 50px;
-            background: #000;
-            margin-bottom: 20px;
+            width: 50px; height: 50px; background: #000; margin-bottom: 20px;
             clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
         }
 
-        .back-text {
-            color: #333;
-            text-align: center;
-            text-shadow: 1px 1px 0px rgba(255,255,255,0.4);
-        }
-
+        .back-text { color: #333; text-align: center; text-shadow: 1px 1px 0px rgba(255,255,255,0.4); }
         .back-text h2 { margin: 0; font-size: 1.8rem; letter-spacing: 2px; }
         .back-text p { margin: 5px 0; font-size: 1.5rem; }
         .back-text .details { font-size: 1.3rem; margin-top: 30px; opacity: 0.8; }
@@ -130,322 +97,134 @@
         .bottom { width: 320px; height: 30px; background: #777; left: 0; top: 245px; transform: rotateX(-90deg) translateZ(260px); }
 
         .ipod-screen {
-            background: #000;
-            border: 4px solid #000;
-            height: 240px;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            box-shadow: inset 4px 4px 8px rgba(0,0,0,0.8);
-            pointer-events: none;
+            background: #000; border: 4px solid #000; height: 240px;
+            display: flex; flex-direction: column; overflow: hidden;
+            box-shadow: inset 4px 4px 8px rgba(0,0,0,0.8); pointer-events: none;
         }
 
         .image-container {
-            width: 100%;
-            height: 195px;
-            background: #111;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 100%; height: 195px; background: #111;
+            display: flex; align-items: center; justify-content: center;
         }
 
-        /* Keep the videos (like your volcano) filling the screen */
-        .image-container video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            image-rendering: pixelated;
-        }
+        .image-container video { width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; }
 
-        /* Force the icons to shrink, fit, and show their boxes */
         .image-container img.pixelated-icon {
-            width: 85% !important;
-            height: 85% !important;
-            object-fit: contain !important; /* Forces it to NOT crop */
-            image-rendering: pixelated;
-            padding: 10px;
-            box-sizing: border-box;
-            background: #050505;
+            width: 85% !important; height: 85% !important; object-fit: contain !important;
+            image-rendering: pixelated; padding: 10px; box-sizing: border-box; background: #050505;
         }
 
         /* --- THE DYNAMIC COLORED BOXES --- */
         img.box-blue { border: 2px solid #0088ff !important; box-shadow: 0 0 10px rgba(0, 136, 255, 0.6) !important; }
+        img.box-teal { border: 2px solid #00f6ff !important; box-shadow: 0 0 10px rgba(0, 246, 255, 0.6) !important; }
         img.box-orange { border: 2px solid #ff5500 !important; box-shadow: 0 0 10px rgba(255, 85, 0, 0.6) !important; }
-        img.box-yellow { border: 2px solid #ffcc00 !important; box-shadow: 0 0 10px rgba(255, 204, 0, 0.6) !important; }
-        img.box-green { border: 2px solid #00ff41 !important; box-shadow: 0 0 10px rgba(0, 255, 65, 0.6) !important; }
-        img.box-pink { border: 2px solid #ff00aa !important; box-shadow: 0 0 10px rgba(255, 0, 170, 0.6) !important; }
-        img.box-red { border: 2px solid #ff2222 !important; box-shadow: 0 0 10px rgba(255, 34, 34, 0.6) !important; }
-        img.box-cyan { border: 2px solid #00ffff !important; box-shadow: 0 0 10px rgba(0, 255, 255, 0.6) !important; }
         img.box-purple { border: 2px solid #aa00ff !important; box-shadow: 0 0 10px rgba(170, 0, 255, 0.6) !important; }
+        img.box-cyan { border: 2px solid #00ffff !important; box-shadow: 0 0 10px rgba(0, 255, 255, 0.6) !important; }
 
         .screen-text {
-            padding: 8px;
-            background: #000;
-            color: #fff;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            padding: 8px; background: #000; color: #fff; flex-grow: 1;
+            display: flex; flex-direction: column; justify-content: center;
         }
 
-        .screen-text h3 {
-            margin: 0;
-            font-size: 1.4rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+        .screen-text h3 { margin: 0; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 1px; }
 
-        .ipod-wheel-container {
-            flex-grow: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: none;
-        }
+        .ipod-wheel-container { flex-grow: 1; display: flex; align-items: center; justify-content: center; pointer-events: none; }
 
         .click-wheel {
-            width: 160px;
-            height: 160px;
-            background: #fff;
-            border: 4px solid #000;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
+            width: 160px; height: 160px; background: #fff; border: 4px solid #000; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; position: relative;
         }
 
-        .wheel-center {
-            width: 50px;
-            height: 50px;
-            background: #e0e0e0;
-            border: 4px solid #000;
-            border-radius: 50%;
-        }
+        .wheel-center { width: 50px; height: 50px; background: #e0e0e0; border: 4px solid #000; border-radius: 50%; }
 
         .wheel-label { position: absolute; font-size: 1rem; color: #888; font-weight: bold; }
         .label-top { top: 10px; } .label-bottom { bottom: 10px; } .label-left { left: 10px; } .label-right { right: 10px; }
 
         /* --- UI OVERLAYS --- */
         #controls-info {
-            position: fixed;
-            bottom: 20px;
-            width: 100%;
-            text-align: center;
-            color: #00ff41;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            text-shadow: 1px 1px 0px #000;
-            z-index: 100;
-            pointer-events: none;
-            opacity: 0.6;
+            position: fixed; bottom: 20px; width: 100%; text-align: center; color: #00ff41;
+            font-size: 0.8rem; letter-spacing: 1px; text-shadow: 1px 1px 0px #000; z-index: 100; pointer-events: none; opacity: 0.6;
         }
 
         .nav-arrow {
-            position: fixed;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 5rem;
-            color: #fff;
-            text-shadow: 4px 4px 0px #00ff41;
-            cursor: pointer;
-            z-index: 100;
-            padding: 20px;
-            opacity: 0.7;
-            transition: opacity 0.2s, transform 0.1s, color 0.2s;
+            position: fixed; top: 50%; transform: translateY(-50%); font-size: 5rem; color: #fff;
+            text-shadow: 4px 4px 0px #00ff41; cursor: pointer; z-index: 100; padding: 20px; opacity: 0.7; transition: opacity 0.2s, transform 0.1s, color 0.2s;
         }
-
-        .nav-arrow:hover {
-            opacity: 1;
-            color: #00ff41;
-            text-shadow: 4px 4px 0px #fff;
-        }
-
-        .nav-arrow:active {
-            transform: translateY(-50%) scale(0.9);
-        }
-
-        #left-arrow { left: 30px; }
-        #right-arrow { right: 30px; }
-        /* The keyframe animation for the click pop */
+        .nav-arrow:hover { opacity: 1; color: #00ff41; text-shadow: 4px 4px 0px #fff; }
+        .nav-arrow:active { transform: translateY(-50%) scale(0.9); }
+        #left-arrow { left: 30px; } #right-arrow { right: 30px; }
+        
         @keyframes arrowPop {
             0% { transform: translateY(-50%) scale(1); }
             50% { transform: translateY(-50%) scale(0.6); color: #fff; text-shadow: 0 0 20px #00ff41; }
             100% { transform: translateY(-50%) scale(1); }
         }
+        .nav-arrow.pop { animation: arrowPop 0.15s ease-out; }
 
-        /* The class we will trigger via JavaScript */
-        .nav-arrow.pop {
-            animation: arrowPop 0.15s ease-out;
-        }
-
-        /* --- PIXELATED RETRO MAC MODAL --- */
+        /* --- MODAL --- */
         #project-modal {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.9); /* Made background slightly darker */
-            z-index: 999999 !important; /* Forces it to the very top */
-            transform: translateZ(2000px); /* Pushes it out of the 3D space towards the user */
-            /* ... keep your other existing rules for it ... */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s ease;
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.9);
+            z-index: 999999 !important; transform: translateZ(2000px); display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.2s ease;
         }
-
         #project-modal.active { opacity: 1; pointer-events: all; }
         #project-modal.active .modal-content { transform: scale(1); }
 
         .modal-content {
-            background: #fff;
-            border: 4px solid #000;
-            box-shadow: 12px 12px 0px #00ff41;
-            width: 90%;
-            max-width: 800px;
-            max-height: 90vh;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            transform: scale(0.1);
-            transition: transform 0.25s ease-out;
+            background: #fff; border: 4px solid #000; box-shadow: 12px 12px 0px #00ff41;
+            width: 90%; max-width: 800px; max-height: 90vh; display: flex; flex-direction: column;
+            position: relative; transform: scale(0.1); transition: transform 0.25s ease-out;
         }
 
         .modal-header {
-            background: #000;
-            color: #fff;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 4px solid #000;
+            background: #000; color: #fff; padding: 10px 20px; display: flex; justify-content: space-between;
+            align-items: center; border-bottom: 4px solid #000;
         }
-
         .modal-header h2 { margin: 0; font-size: 1.8rem; }
-
         .close-btn {
-            background: #ff3300;
-            border: 4px solid #fff;
-            color: #fff;
-            font-family: 'VT323', monospace;
-            font-size: 1.5rem;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: #ff3300; border: 4px solid #fff; color: #fff; font-family: 'VT323', monospace;
+            font-size: 1.5rem; cursor: pointer; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
         }
-
         .close-btn:hover { background: #fff; color: #ff3300; border-color: #000; }
 
-        .modal-body {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            overflow-y: auto;
-            background: #f0f0f0;
-            color: #000;
-        }
+        .modal-body { padding: 20px; display: flex; flex-direction: column; gap: 20px; overflow-y: auto; background: #f0f0f0; color: #000; }
 
         .modal-main-media {
-            width: 100%;
-            background: #111;
-            border: 4px solid #000;
-            display: flex;
-            flex-direction: column; /* This stacks your work vertically */
-            align-items: center;
-            gap: 20px; /* Space between multiple pictures */
-            padding: 20px;
-            box-sizing: border-box;
+            width: 100%; background: transparent; border: none; display: flex; flex-direction: column;
+            align-items: center; gap: 30px; padding: 0; box-sizing: border-box;
         }
-
         .modal-main-media img, .modal-main-media video {
-            width: 100%;
-            height: auto;
-            max-height: none; /* Lets the full image show without squishing */
-            object-fit: contain;
-            border: 2px solid #00ff41; /* Puts a clean green border around your real work */
-        }
+            width: 100%; height: auto; max-height: none; object-fit: contain; border: none; image-rendering: auto;
         }
 
-        .modal-main-media img, .modal-main-media video {
-            width: 100%;
-            height: auto;
-            max-height: 50vh;
-            object-fit: contain;
-            image-rendering: auto;
-        }
-
-        .modal-text {
-            font-size: 1.3rem;
-            line-height: 1.4;
-            padding: 15px;
-            background: #fff;
-            border: 4px solid #000;
-        }
-        
+        .modal-text { font-size: 1.3rem; line-height: 1.4; padding: 15px; background: #fff; border: 4px solid #000; }
         .modal-text a { color: #ff3300; text-decoration: underline; }
         .modal-text a:hover { color: #00ff41; background: #000; }
         
         #main-title {
-                    position: fixed;
-                    top: 40px;
-                    left: 0;
-                    width: 100vw;
-                    display: flex;
-                    justify-content: center;
-                    color: #00ff41;
-                    font-size: 1rem;
-                    letter-spacing: 6px;
-                    text-shadow: 4px 4px 0px #000;
-                    z-index: 100;
-                    pointer-events: none;
-                    opacity: 1;
-                    margin: 0;
-                }
-        /* --- SCROLLING GALLERY STYLES --- */
-                .work-item {
-                    width: 100%;
-                    margin-bottom: 50px; /* Space between each project piece */
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                }
-
-                .work-title {
-                    color: #00ff41;
-                    font-size: 1.5rem;
-                    margin: 0 0 15px 0;
-                    text-transform: uppercase;
-                    letter-spacing: 2px;
-                    text-align: center;
-                    background: #000;
-                    padding: 5px 15px;
-                    border: 2px solid #00ff41;
-                    box-shadow: 4px 4px 0px #000;
-                }
-
-                .work-desc {
-                    color: #ccc; /* Slightly dimmed white so the title stands out */
-                    font-size: 1.2rem;
-                    text-align: center;
-                    margin: 15px 0 0 0;
-                    max-width: 90%;
-                    line-height: 1.4;
-                }
-        /* Special size control just for the profile picture */
-        img.profile-pic {
-            width: 300px !important; /* Change this number to make it bigger or smaller! */
-            height: auto !important;
-            border: 2px solid #00ff41 !important; /* Adds a nice retro green border to your photo */
-            margin: 0 auto; /* Keeps it perfectly centered */
+            position: fixed; top: 40px; left: 0; width: 100vw; display: flex; justify-content: center;
+            color: #00ff41; font-size: 2.5rem; letter-spacing: 6px; text-shadow: 4px 4px 0px #000;
+            z-index: 100; pointer-events: none; opacity: 1; margin: 0;
         }
-            </style>
-        </head>
+
+        /* --- SCROLLING GALLERY --- */
+        .work-item { width: 100%; margin-bottom: 50px; display: flex; flex-direction: column; align-items: center; }
+        .work-title {
+            color: #00ff41; font-size: 1.5rem; margin: 0 0 15px 0; text-transform: uppercase;
+            letter-spacing: 2px; text-align: center; background: #000; padding: 5px 15px; border: 2px solid #00ff41; box-shadow: 4px 4px 0px #000;
+        }
+        .work-desc {
+            color: #333; font-size: 1.2rem; text-align: center; margin: 15px 0 0 0; max-width: 90%; line-height: 1.4;
+        }
+        .work-desc a.store-link {
+            color: #000; text-decoration: none; font-weight: bold; display: inline-block;
+            margin-top: 8px; border-bottom: 1px dashed #000; transition: all 0.2s ease;
+        }
+        .work-desc a.store-link:hover { color: #ff3300; border-bottom: 1px solid #ff3300; }
+
+        img.profile-pic { width: 300px !important; height: auto !important; border: 2px solid #00ff41 !important; margin: 0 auto; }
+    </style>
+</head>
 <body>
     <div id="main-title">ALI MURTAZA // portfolio</div>
     <canvas id="pixel-canvas"></canvas>
@@ -457,22 +236,16 @@
     <div id="scene">
         <div id="carousel">
             
-            <!-- CARD 1: PROFILE -->
-            <div class="media-card" data-fulltext="Multiisciplinary artist/designer - passionate about 3d modelling + animation, game design and other weirdly cool stuff.  <br><br><b>Contact:</b> <a href='mailto: alixmurtazx@gmail.com'>Email Me</a><br><b>CV:</b> <a href='CV2026 - Ali Murtaza.pdf' target='_blank'>Download CV</a><br><b>Instagram:</b> <a href='https://instagram.com/ali_murtazaa' target='_blank'>Get in touch!</a>">
-                
-                <!-- HIDDEN PORTFOLIO PICTURES: Change 'ali-pic.jpg' to your real photo -->
+            <div class="media-card" data-fulltext="Multidisciplinary artist/designer who codes just enough to make things work. I am passionate about 3d modelling + animation, game design and creating my own art, characters and environments to build inside apps and games.<br><br> <a href='mailto: alixmurtazx@gmail.com'>Email Me</a><br> <a href='CV2026 - Ali Murtaza.pdf' target='_blank'>Download CV</a><br> <a href='https://linkedin.com/in/alimurtazx' target='_blank'>LinkedIn</a><br> <a href='https://instagram.com/ali_murtazaa' target='_blank'>Instagram</a>">
                 <div class="gallery-assets" style="display: none;">
                     <div class="work-item">
                         <img src="ali pic.png" alt="Ali Murtaza" class="profile-pic">
                     </div>
                 </div>
-                
                 <div class="ipod-body">
                     <div class="face front">
                         <div class="ipod-screen">
-                            <div class="image-container">
-                                <img src="icon-profile.jpg" alt="" class="pixelated-icon box-blue">
-                            </div>
+                            <div class="image-container"><img src="icon-profile.jpg" alt="" class="pixelated-icon box-blue"></div>
                             <div class="screen-text"><h3>PROFILE</h3></div>
                         </div>
                         <div class="ipod-wheel-container">
@@ -487,36 +260,67 @@
                     <div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div>
                 </div>
             </div>
-            
-            <!-- CARD 2: 3D STUFF -->
-            <div class="media-card" data-fulltext="More 3d stuff coming soon...">
-                
-                <div class="gallery-assets" style="display: none;">
-                    
-                    <div class="work-item">
-                        <h4 class="work-title"> WWF Astroni Oasis, Napoli, Italy</h4>
-                        <video src="3D Map Astroni.mp4" autoplay loop muted playsinline></video>
-                        <p class="work-desc">Created 3d model using Blender for a project under WWF, of a site called 'Astroni Oasis' in the last chellenge at Apple Developer Academy in Napoli, Italy</p>
-                    </div>
 
+            <div class="media-card" data-fulltext="A collection of applications and games developed during the Apple Developer Academy. This gallery showcases unique execution across 7 distinct challenges, focusing on native frameworks, immersive interactions, and functional iOS design.">
+                <div class="gallery-assets" style="display: none;">
+                    <div class="work-item">
+                        <h4 class="work-title">Planet Buddy!</h4>
+                        <img src="challenge1.png" alt="Challenge 1 Showcase">
+                        <p class="work-desc">
+                            For the first challenge of the Apple Developer Academy, we aimed to create a gamified learning experience for children to help them learn some basic facts about the most popular animals from each continent. I made 3d low-poly models of the animals and a 3d model of the globe.
+                            <br><a href="https://github.com/io1711/PlanetBuddy" target="_blank" class="store-link">[Github Link]</a>
+                        </p>
+                    </div>
+                    <div class="work-item">
+                        <h4 class="work-title">Challenge 02: [App Name]</h4>
+                        <video src="challenge2.mp4" autoplay loop muted playsinline></video>
+                        <p class="work-desc">
+                            Description for the second challenge goes here.
+                            <br><a href="https://apps.apple.com/your-link" target="_blank" class="store-link">[App Store Link]</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="ipod-body">
+                    <div class="face front">
+                        <div class="ipod-screen">
+                            <div class="image-container"><img src="icon-apps.jpg" alt="" class="pixelated-icon box-teal"></div>
+                            <div class="screen-text"><h3>APPS/GAMES</h3></div>
+                        </div>
+                        <div class="ipod-wheel-container">
+                            <div class="click-wheel">
+                                <span class="wheel-label label-top">MENU</span><span class="wheel-label label-bottom">&gt;||</span>
+                                <span class="wheel-label label-left">|&lt;&lt;</span><span class="wheel-label label-right">&gt;&gt;|</span>
+                                <div class="wheel-center"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="face back"><div class="back-logo"></div><div class="back-text"><h2>PORTFOLIO</h2><p>VOL. 1</p><p class="details">Designed by Ali Murtaza<br> // 2026</p></div></div>
+                    <div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div>
+                </div>
+            </div>
+            
+            <div class="media-card" data-fulltext="Exploring environments through a technical lens. Creating optimized low-poly topologies for high-performance mobile experiences.">
+                <div class="gallery-assets" style="display: none;">
+                    <div class="work-item">
+                        <h4 class="work-title">WWF Astroni Oasis, Napoli</h4>
+                        <video src="3D Map Astroni.mp4" autoplay loop muted playsinline></video>
+                        <p class="work-desc">Created a 3D model using Blender for a project under WWF, modeling the 'Astroni Oasis' for the final challenge at the Apple Developer Academy.</p>
+                    </div>
                     <div class="work-item">
                         <h4 class="work-title">Topology & Wireframe</h4>
                         <img src="map wireframe.png" alt="Wireframe view">
                         <p class="work-desc">A breakdown of the structure before texturing.</p>
                     </div>
                     <div class="work-item">
-                        <h4 class="work-title"> The floor is literally lava </h4>
+                        <h4 class="work-title">The floor is literally lava</h4>
                         <video src="lava.mp4" autoplay loop muted playsinline></video>
-                        <p class="work-desc">Created this 3D Animation in Blender for the same project to enhance the user experience. </p>
+                        <p class="work-desc">Created this 3D Animation in Blender for the same project to enhance the user experience.</p>
                     </div>
-
                 </div>
                 <div class="ipod-body">
                     <div class="face front">
                         <div class="ipod-screen">
-                            <div class="image-container">
-                                <img src="icon-3d.jpg" alt="" class="pixelated-icon box-orange">
-                            </div>
+                            <div class="image-container"><img src="icon-3d.jpg" alt="" class="pixelated-icon box-orange"></div>
                             <div class="screen-text"><h3>3D STUFF</h3></div>
                         </div>
                         <div class="ipod-wheel-container">
@@ -531,176 +335,25 @@
                     <div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div>
                 </div>
             </div>
-            
-            <!-- CARD 3: CHARACTER DESIGN -->
-            <div class="media-card" data-fulltext="Narrative concepts driven by expressive linear explorations. These designs utilize wobbly, hand-drawn vector lines and distorted proportions to create highly distinct, otherworldly figures.">
-                
-                <!-- HIDDEN PORTFOLIO PICTURES: Put your character designs here -->
-                <div class="gallery-assets" style="display: none;">
-                    <div class="work-item">
-                        <h4 class="work-title">Fight Ink Game</h4>
-                        <img src="hero.png" alt="">
-                        <p class="work-desc">This character was born from a silly idea for a game existing on an office table, this protagonist is an ink blot born on the table, the enemies are an eraser, a ball of pins, a stapler.</p>
-                    </div>
-                    <div class="work-item">
-                        <h4 class="work-title"> The floor is literally lava </h4>
-                        <video src="lava.mp4" autoplay loop muted playsinline></video>
-                        <p class="work-desc">Created this 3D Animation in Blender for the same project to enhance the user experience. </p>
-                    </div>
-                </div>
-                
-                <div class="ipod-body">
-                    <div class="face front">
-                        <div class="ipod-screen">
-                            <div class="image-container">
-                                <img src="icon-character.jpg" alt="" class="pixelated-icon box-yellow">
-                            </div>
-                            <div class="screen-text"><h3>CHARACTER DESIGN</h3></div>
-                        </div>
-                        <div class="ipod-wheel-container">
-                            <div class="click-wheel">
-                                <span class="wheel-label label-top">MENU</span><span class="wheel-label label-bottom">&gt;||</span>
-                                <span class="wheel-label label-left">|&lt;&lt;</span><span class="wheel-label label-right">&gt;&gt;|</span>
-                                <div class="wheel-center"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="face back"><div class="back-logo"></div><div class="back-text"><h2>PORTFOLIO</h2><p>VOL. 1</p><p class="details">Designed by Ali Murtaza<br> // 2026</p></div></div>
-                    <div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div>
-                </div>
-            </div>
-            
-            <!-- CARD 4: AR -->
-            <div class="media-card" data-fulltext="Augmented reality interactions bridging the gap between my 3D environments, 2D characters, and physical space. Utilizing frameworks like RealityKit to gamify educational concepts.">
-                
-                <!-- HIDDEN PORTFOLIO PICTURES: Put your RealityKit/AR videos and screenshots here -->
-                <div class="gallery-assets" style="display: none;">
-                    <img src="ar.jpg" alt="AR Demo">
-                </div>
-                
-                <div class="ipod-body">
-                    <div class="face front">
-                        <div class="ipod-screen">
-                            <div class="image-container">
-                                <img src="icon-ar.jpg" alt="" class="pixelated-icon box-green">
-                            </div>
-                            <div class="screen-text"><h3>AR</h3></div>
-                        </div>
-                        <div class="ipod-wheel-container">
-                            <div class="click-wheel">
-                                <span class="wheel-label label-top">MENU</span><span class="wheel-label label-bottom">&gt;||</span>
-                                <span class="wheel-label label-left">|&lt;&lt;</span><span class="wheel-label label-right">&gt;&gt;|</span>
-                                <div class="wheel-center"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="face back"><div class="back-logo"></div><div class="back-text"><h2>PORTFOLIO</h2><p>VOL. 1</p><p class="details">Designed by Ali Murtaza<br> // 2026</p></div></div>
-                    <div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div>
-                </div>
-            </div>
-            
-            <!-- CARD 5: APP ICONS -->
-            <div class="media-card" data-fulltext="For projects like Bug Buddies, I moved away from standard 3D assets to a highly expressive 2D drawing style. The icon and UI components reflect a hand-drawn approach.">
-                
-                <!-- HIDDEN PORTFOLIO PICTURES: Put your app UI and 2D Bug Buddies icons here -->
-                <div class="gallery-assets" style="display: none;">
-                    <img src="appicons.jpg" alt="App Icons UI">
-                </div>
-                
-                <div class="ipod-body">
-                    <div class="face front">
-                        <div class="ipod-screen">
-                            <div class="image-container">
-                                <img src="icon-bug.jpg" alt="" class="pixelated-icon box-pink">
-                            </div>
-                            <div class="screen-text"><h3>APP ICONS</h3></div>
-                        </div>
-                        <div class="ipod-wheel-container">
-                            <div class="click-wheel">
-                                <span class="wheel-label label-top">MENU</span><span class="wheel-label label-bottom">&gt;||</span>
-                                <span class="wheel-label label-left">|&lt;&lt;</span><span class="wheel-label label-right">&gt;&gt;|</span>
-                                <div class="wheel-center"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="face back"><div class="back-logo"></div><div class="back-text"><h2>PORTFOLIO</h2><p>VOL. 1</p><p class="details">Designed by Ali Murtaza<br> // 2026</p></div></div>
-                    <div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div>
-                </div>
-            </div>
-            
-            <!-- CARD 6: POSTERS -->
-            <div class="media-card" data-fulltext="Event branding and editorial design focusing heavily on typography and negative space. A strict minimalist aesthetic that completely omits background elements to command hierarchy.">
-                
-                <!-- HIDDEN PORTFOLIO PICTURES: Put your minimalist posters here -->
-                <div class="gallery-assets" style="display: none;">
-                    <img src="posters.jpg" alt="Poster Design">
-                </div>
-                
-                <div class="ipod-body">
-                    <div class="face front">
-                        <div class="ipod-screen">
-                            <div class="image-container">
-                                <img src="icon-posters.jpg" alt="" class="pixelated-icon box-red">
-                            </div>
-                            <div class="screen-text"><h3>POSTERS</h3></div>
-                        </div>
-                        <div class="ipod-wheel-container">
-                            <div class="click-wheel">
-                                <span class="wheel-label label-top">MENU</span><span class="wheel-label label-bottom">&gt;||</span>
-                                <span class="wheel-label label-left">|&lt;&lt;</span><span class="wheel-label label-right">&gt;&gt;|</span>
-                                <div class="wheel-center"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="face back"><div class="back-logo"></div><div class="back-text"><h2>PORTFOLIO</h2><p>VOL. 1</p><p class="details">Designed by Ali Murtaza<br> // 2026</p></div></div>
-                    <div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div>
-                </div>
-            </div>
-            
-            <!-- CARD 7: PROCESS -->
-            <div class="media-card" data-fulltext="The foundational work. Sketchbook archives, technical documentation, and the iterative workflows that inform both my digital UI design and traditional painting techniques.">
-                
-                <!-- HIDDEN PORTFOLIO PICTURES: Put your workflow, behind-the-scenes, or code snippets here -->
-                <div class="gallery-assets" style="display: none;">
-                    <img src="process.jpg" alt="Workflow and Process">
-                </div>
-                
-                <div class="ipod-body">
-                    <div class="face front">
-                        <div class="ipod-screen">
-                            <div class="image-container">
-                                <img src="icon-process.jpg" alt="" class="pixelated-icon box-cyan">
-                            </div>
-                            <div class="screen-text"><h3>PROCESS</h3></div>
-                        </div>
-                        <div class="ipod-wheel-container">
-                            <div class="click-wheel">
-                                <span class="wheel-label label-top">MENU</span><span class="wheel-label label-bottom">&gt;||</span>
-                                <span class="wheel-label label-left">|&lt;&lt;</span><span class="wheel-label label-right">&gt;&gt;|</span>
-                                <div class="wheel-center"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="face back"><div class="back-logo"></div><div class="back-text"><h2>PORTFOLIO</h2><p>VOL. 1</p><p class="details">Designed by Ali Murtaza<br> // 2026</p></div></div>
-                    <div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div>
-                </div>
-            </div>
-            
-            <!-- CARD 8: TRADITIONAL STUFF -->
+
             <div class="media-card" data-fulltext="Sourced directly from my Masters in Pittura. These mixed-media explorations use wobbly, expressive lines, blending pop-art palettes with distorted figures to bridge the gap between fine art and modern digital aesthetics.">
-                
-                <!-- HIDDEN PORTFOLIO PICTURES: Put photos of your physical mixed-media paintings here -->
                 <div class="gallery-assets" style="display: none;">
-                    <img src="traditional.jpg" alt="Masters in Pittura Paintings">
+                    <div class="work-item">
+                        <h4 class="work-title">Fight Ink Concept</h4>
+                        <img src="hero.png" alt="Fight Ink Game Concept">
+                        <p class="work-desc">This character was born from a silly idea for a game existing on an office table. The protagonist is an ink blot, battling an eraser, a ball of pins, and a stapler.</p>
+                    </div>
+                    <div class="work-item">
+                        <h4 class="work-title">Traditional Canvas</h4>
+                        <img src="traditional.jpg" alt="Masters in Pittura Paintings">
+                        <p class="work-desc">Physical media explorations bridging my technical coding work with raw expressive art.</p>
+                    </div>
                 </div>
-                
                 <div class="ipod-body">
                     <div class="face front">
                         <div class="ipod-screen">
-                            <div class="image-container">
-                                <img src="icon-traditional.jpg" alt="" class="pixelated-icon box-purple">
-                            </div>
-                            <div class="screen-text"><h3>TRADITIONAL STUFF</h3></div>
+                            <div class="image-container"><img src="icon-traditional.jpg" alt="" class="pixelated-icon box-purple"></div>
+                            <div class="screen-text"><h3>PAINTINGS</h3></div>
                         </div>
                         <div class="ipod-wheel-container">
                             <div class="click-wheel">
@@ -714,7 +367,42 @@
                     <div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div>
                 </div>
             </div>
-        </div></div>
+
+            <div class="media-card" data-fulltext="The foundational work. Sketchbook archives, UI concepts, typography styling, and the iterative workflows that inform both my digital execution and traditional painting techniques.">
+                <div class="gallery-assets" style="display: none;">
+                    <div class="work-item">
+                        <h4 class="work-title">Bug Buddies Icons</h4>
+                        <img src="appicons.jpg" alt="App Icons UI">
+                        <p class="work-desc">Moving away from standard 3D assets to a highly expressive 2D drawing style for app UI.</p>
+                    </div>
+                    <div class="work-item">
+                        <h4 class="work-title">Minimalist Typographic Posters</h4>
+                        <img src="posters.jpg" alt="Poster Design">
+                        <p class="work-desc">Event branding and editorial design focusing heavily on typography and negative space.</p>
+                    </div>
+                </div>
+                <div class="ipod-body">
+                    <div class="face front">
+                        <div class="ipod-screen">
+                            <div class="image-container"><img src="icon-process.jpg" alt="" class="pixelated-icon box-cyan"></div>
+                            <div class="screen-text"><h3>PROCESS WORKS</h3></div>
+                        </div>
+                        <div class="ipod-wheel-container">
+                            <div class="click-wheel">
+                                <span class="wheel-label label-top">MENU</span><span class="wheel-label label-bottom">&gt;||</span>
+                                <span class="wheel-label label-left">|&lt;&lt;</span><span class="wheel-label label-right">&gt;&gt;|</span>
+                                <div class="wheel-center"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="face back"><div class="back-logo"></div><div class="back-text"><h2>PORTFOLIO</h2><p>VOL. 1</p><p class="details">Designed by Ali Murtaza<br> // 2026</p></div></div>
+                    <div class="face right"></div><div class="face left"></div><div class="face top"></div><div class="face bottom"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <div id="project-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -729,34 +417,22 @@
     </div>
 
     <script>
-        // --- 1. PIXEL MOUSE TRACKER & DUST PHYSICS ---
         const canvas = document.getElementById('pixel-canvas');
         const ctx = canvas.getContext('2d');
-        
-        let pixels = [];
-        let dust = [];
-        let mouseX = -1000;
-        let mouseY = -1000;
-        let lastMouseX = -1000;
-        let lastMouseY = -1000;
+        let pixels = []; let dust = [];
+        let mouseX = -1000; let mouseY = -1000; let lastMouseX = -1000; let lastMouseY = -1000;
 
         function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            initDust();
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight; initDust();
         }
 
-        // Initialize heavy dust count (400)
         function initDust() {
             dust = [];
             for(let i = 0; i < 5000; i++) {
                 dust.push({
-                    x: Math.random() * window.innerWidth,
-                    y: Math.random() * window.innerHeight,
-                    vx: (Math.random() - 0.5) * 0.5,
-                    vy: (Math.random() - 0.5) * 0.5,
-                    baseVx: (Math.random() - 0.5) * 0.5,
-                    baseVy: (Math.random() - 0.5) * 0.5,
+                    x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight,
+                    vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5,
+                    baseVx: (Math.random() - 0.5) * 0.5, baseVy: (Math.random() - 0.5) * 0.5,
                     size: Math.random() * 1 + 0.2
                 });
             }
@@ -765,88 +441,46 @@
         window.addEventListener('resize', resizeCanvas);
 
         window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-
-            if (lastMouseX === -1000) {
-                lastMouseX = mouseX;
-                lastMouseY = mouseY;
-            }
-
-            let dx = mouseX - lastMouseX;
-            let dy = mouseY - lastMouseY;
-            let dist = Math.sqrt(dx * dx + dy * dy);
-            
-            let spacing = 12;
+            mouseX = e.clientX; mouseY = e.clientY;
+            if (lastMouseX === -1000) { lastMouseX = mouseX; lastMouseY = mouseY; }
+            let dx = mouseX - lastMouseX; let dy = mouseY - lastMouseY;
+            let dist = Math.sqrt(dx * dx + dy * dy); let spacing = 12;
             
             if (dist > spacing) {
                 let steps = Math.floor(dist / spacing);
                 for (let j = 1; j <= steps; j++) {
                     let ratio = j / steps;
-                    pixels.push({
-                        x: lastMouseX + dx * ratio,
-                        y: lastMouseY + dy * ratio,
-                        life: 1.0,
-                        size: Math.random() * 2 + 1
-                    });
+                    pixels.push({ x: lastMouseX + dx * ratio, y: lastMouseY + dy * ratio, life: 1.0, size: Math.random() * 2 + 1 });
                 }
-                lastMouseX = mouseX;
-                lastMouseY = mouseY;
+                lastMouseX = mouseX; lastMouseY = mouseY;
             }
         });
 
         function animateCanvas() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // DRAW DUST PHYSICS
             ctx.fillStyle = '#ffffff';
             for(let i = 0; i < dust.length; i++) {
                 let d = dust[i];
-                
-                let dx = d.x - mouseX;
-                let dy = d.y - mouseY;
-                let dist = Math.sqrt(dx * dx + dy * dy);
-                
+                let dx = d.x - mouseX; let dy = d.y - mouseY; let dist = Math.sqrt(dx * dx + dy * dy);
                 if (dist < 100) {
-                    let force = (100 - dist) / 100;
-                    d.vx += (dx / dist) * force * 0.5;
-                    d.vy += (dy / dist) * force * 0.5;
+                    let force = (100 - dist) / 100; d.vx += (dx / dist) * force * 0.5; d.vy += (dy / dist) * force * 0.5;
                 }
-
-                d.vx = d.vx * 0.92 + d.baseVx * 0.08;
-                d.vy = d.vy * 0.92 + d.baseVy * 0.08;
-
-                d.x += d.vx;
-                d.y += d.vy;
-
-                if(d.x < 0) d.x = canvas.width;
-                if(d.x > canvas.width) d.x = 0;
-                if(d.y < 0) d.y = canvas.height;
-                if(d.y > canvas.height) d.y = 0;
-
-                ctx.globalAlpha = 0.6;
-                ctx.fillRect(d.x, d.y, d.size, d.size);
+                d.vx = d.vx * 0.92 + d.baseVx * 0.08; d.vy = d.vy * 0.92 + d.baseVy * 0.08;
+                d.x += d.vx; d.y += d.vy;
+                if(d.x < 0) d.x = canvas.width; if(d.x > canvas.width) d.x = 0;
+                if(d.y < 0) d.y = canvas.height; if(d.y > canvas.height) d.y = 0;
+                ctx.globalAlpha = 0.6; ctx.fillRect(d.x, d.y, d.size, d.size);
             }
-
-            // DRAW PIXEL TRAIL
             ctx.fillStyle = '#00ff41';
             for(let i = 0; i < pixels.length; i++) {
-                let p = pixels[i];
-                ctx.globalAlpha = p.life;
-                ctx.fillRect(p.x, p.y, p.size, p.size);
-                p.life -= 0.02;
+                let p = pixels[i]; ctx.globalAlpha = p.life; ctx.fillRect(p.x, p.y, p.size, p.size); p.life -= 0.02;
             }
             pixels = pixels.filter(p => p.life > 0);
-            
-            ctx.globalAlpha = 1.0;
-            requestAnimationFrame(animateCanvas);
+            ctx.globalAlpha = 1.0; requestAnimationFrame(animateCanvas);
         }
         
-        resizeCanvas();
-        animateCanvas();
+        resizeCanvas(); animateCanvas();
 
-
-        // --- 2. 3D ENGINE, MODAL, & ARROW UI LOGIC ---
         const carousel = document.getElementById('carousel');
         const cards = document.querySelectorAll('.media-card');
         const modal = document.getElementById('project-modal');
@@ -854,7 +488,6 @@
         const modalTitle = document.getElementById('modal-title');
         const modalDesc = document.getElementById('modal-description');
         const modalMedia = document.getElementById('modal-media-container');
-        
         const leftArrow = document.getElementById('left-arrow');
         const rightArrow = document.getElementById('right-arrow');
 
@@ -863,42 +496,31 @@
         const theta = 360 / numberOfCards;
         const radius = Math.round((320 / 2) / Math.tan(Math.PI / numberOfCards)) + 550;
 
-                                  cards.forEach((card, index) => {
-                                      const angle = theta * index;
-                                      card.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
-                                      
-                                      card.addEventListener('click', () => {
-                                          if(Math.abs(dragDistance) > 5) return;
+        cards.forEach((card, index) => {
+            const angle = theta * index;
+            card.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
+            
+            card.addEventListener('click', () => {
+                if(Math.abs(dragDistance) > 5) return;
+                isModalOpen = true;
+                const title = card.querySelector('h3').innerText;
+                const fullText = card.getAttribute('data-fulltext');
+                const galleryElement = card.querySelector('.gallery-assets');
+                const mediaHTML = galleryElement ? galleryElement.innerHTML : card.querySelector('.image-container').innerHTML;
 
-                                          isModalOpen = true;
-                                          const title = card.querySelector('h3').innerText;
-                                          const fullText = card.getAttribute('data-fulltext');
-                                          
-                                          // Look for the hidden gallery we just made
-                                          const galleryElement = card.querySelector('.gallery-assets');
-                                          
-                                          // If the gallery exists, use it! Otherwise, fallback to the icon.
-                                          const mediaHTML = galleryElement ? galleryElement.innerHTML : card.querySelector('.image-container').innerHTML;
-
-                                          modalTitle.innerText = title + ".EXE";
-                                          modalDesc.innerHTML = fullText;
-                                          
-                                          // Inject the gallery into the pop-up
-                                          modalMedia.innerHTML = mediaHTML;
-                                          
-                                          modal.classList.add('active');
-                                      });
-                                  });
+                modalTitle.innerText = title + ".EXE";
+                modalDesc.innerHTML = fullText;
+                modalMedia.innerHTML = mediaHTML;
+                modal.classList.add('active');
+            });
+        });
 
         closeModalBtn.addEventListener('click', () => {
             modal.classList.remove('active');
             setTimeout(() => { isModalOpen = false; }, 200);
         });
 
-        let currentRotation = 0;
-        let isDragging = false;
-        let startX = 0;
-        let dragDistance = 0;
+        let currentRotation = 0; let isDragging = false; let startX = 0; let dragDistance = 0;
 
         function updateRotation() {
             carousel.style.transition = 'transform 0.3s ease-out';
@@ -906,86 +528,53 @@
         }
         updateRotation();
 
-                                  // --- HELPER: Trigger the pop animation ---
-                                  function animateArrow(arrowElement) {
-                                      // Remove class to reset the animation if clicked rapidly
-                                      arrowElement.classList.remove('pop');
-                                      // Trigger a reflow to restart the CSS animation
-                                      void arrowElement.offsetWidth;
-                                      // Apply the animation class
-                                      arrowElement.classList.add('pop');
-                                  }
+        function animateArrow(arrowElement) {
+            arrowElement.classList.remove('pop');
+            void arrowElement.offsetWidth;
+            arrowElement.classList.add('pop');
+        }
 
-                                  // Arrow Button Logic
-                                  leftArrow.addEventListener('click', () => {
-                                      if (isModalOpen) return;
-                                      animateArrow(leftArrow); // Trigger visual click
-                                      currentRotation += theta;
-                                      updateRotation();
-                                  });
+        leftArrow.addEventListener('click', () => {
+            if (isModalOpen) return; animateArrow(leftArrow); currentRotation += theta; updateRotation();
+        });
 
-                                  rightArrow.addEventListener('click', () => {
-                                      if (isModalOpen) return;
-                                      animateArrow(rightArrow); // Trigger visual click
-                                      currentRotation -= theta;
-                                      updateRotation();
-                                  });
+        rightArrow.addEventListener('click', () => {
+            if (isModalOpen) return; animateArrow(rightArrow); currentRotation -= theta; updateRotation();
+        });
 
-                                  // Keyboard Logic
-                                  window.addEventListener('keydown', (e) => {
-                                      if (isModalOpen) return;
-                                      
-                                      if (e.key === 'ArrowRight') {
-                                          animateArrow(rightArrow); // Visually click the UI arrow
-                                          currentRotation -= theta / 2;
-                                      }
-                                      else if (e.key === 'ArrowLeft') {
-                                          animateArrow(leftArrow); // Visually click the UI arrow
-                                          currentRotation += theta / 2;
-                                      }
-                                      updateRotation();
-                                  });
-
-        // Drag Logic
-        window.addEventListener('mousedown', (e) => {
+        window.addEventListener('keydown', (e) => {
             if (isModalOpen) return;
-            isDragging = true; dragDistance = 0; startX = e.clientX;
-            carousel.style.transition = 'none';
+            if (e.key === 'ArrowRight') { animateArrow(rightArrow); currentRotation -= theta / 2; }
+            else if (e.key === 'ArrowLeft') { animateArrow(leftArrow); currentRotation += theta / 2; }
+            updateRotation();
+        });
+
+        window.addEventListener('mousedown', (e) => {
+            if (isModalOpen) return; isDragging = true; dragDistance = 0; startX = e.clientX; carousel.style.transition = 'none';
         });
 
         window.addEventListener('mousemove', (e) => {
             if (!isDragging || isModalOpen) return;
-            const deltaX = e.clientX - startX;
-            dragDistance += deltaX; currentRotation += deltaX * 0.2;
-            startX = e.clientX;
-            carousel.style.transform = `translateZ(${-radius}px) rotateY(${currentRotation}deg)`;
+            const deltaX = e.clientX - startX; dragDistance += deltaX; currentRotation += deltaX * 0.2;
+            startX = e.clientX; carousel.style.transform = `translateZ(${-radius}px) rotateY(${currentRotation}deg)`;
         });
 
         window.addEventListener('mouseup', () => {
-            if (!isDragging) return;
-            isDragging = false;
-            updateRotation();
+            if (!isDragging) return; isDragging = false; updateRotation();
         });
 
-        // Touch Logic
         window.addEventListener('touchstart', (e) => {
-            if (isModalOpen) return;
-            isDragging = true; dragDistance = 0; startX = e.touches[0].clientX;
-            carousel.style.transition = 'none';
+            if (isModalOpen) return; isDragging = true; dragDistance = 0; startX = e.touches[0].clientX; carousel.style.transition = 'none';
         });
 
         window.addEventListener('touchmove', (e) => {
             if (!isDragging || isModalOpen) return;
-            const deltaX = e.touches[0].clientX - startX;
-            dragDistance += deltaX; currentRotation += deltaX * 0.4;
-            startX = e.touches[0].clientX;
-            carousel.style.transform = `translateZ(${-radius}px) rotateY(${currentRotation}deg)`;
+            const deltaX = e.touches[0].clientX - startX; dragDistance += deltaX; currentRotation += deltaX * 0.4;
+            startX = e.touches[0].clientX; carousel.style.transform = `translateZ(${-radius}px) rotateY(${currentRotation}deg)`;
         });
 
         window.addEventListener('touchend', () => {
-            if (!isDragging) return;
-            isDragging = false;
-            updateRotation();
+            if (!isDragging) return; isDragging = false; updateRotation();
         });
 
     </script>
