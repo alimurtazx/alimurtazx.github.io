@@ -463,10 +463,12 @@
             for(let i = 0; i < dust.length; i++) {
                 let d = dust[i];
                 let dx = d.x - mouseX; let dy = d.y - mouseY; let dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 100) {
-                    let force = (100 - dist) / 100; d.vx += (dx / dist) * force * 0.5; d.vy += (dy / dist) * force * 0.5;
+                if (dist < 70) {
+                    let force = (70 - dist) / 70; d.vx += (dx / dist) * force * 1.5;
+                    d.vy += (dy / dist) * force * 1.5;
                 }
-                d.vx = d.vx * 0.92 + d.baseVx * 0.08; d.vy = d.vy * 0.92 + d.baseVy * 0.08;
+                d.vx = d.vx * 0.80 + d.baseVx * 0.20;
+                                d.vy = d.vy * 0.80 + d.baseVy * 0.20;
                 d.x += d.vx; d.y += d.vy;
                 if(d.x < 0) d.x = canvas.width; if(d.x > canvas.width) d.x = 0;
                 if(d.y < 0) d.y = canvas.height; if(d.y > canvas.height) d.y = 0;
