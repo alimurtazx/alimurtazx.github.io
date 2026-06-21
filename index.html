@@ -9,83 +9,31 @@
         @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
         body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
+            margin: 0; padding: 0; width: 100%; height: 100%;
             background-color: #050505;
-            background-image:
-                linear-gradient(#111 2px, transparent 2px),
-                linear-gradient(90deg, #111 2px, transparent 2px);
-            background-size: 30px 30px;
-            color: #ffffff;
-            font-family: 'VT323', monospace;
-            overflow: hidden;
-            user-select: none;
-            cursor: crosshair;
+            background-image: linear-gradient(#111 2px, transparent 2px), linear-gradient(90deg, #111 2px, transparent 2px);
+            background-size: 30px 30px; color: #ffffff;
+            font-family: 'VT323', monospace; overflow: hidden; user-select: none; cursor: crosshair;
         }
 
-        #pixel-canvas {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none; z-index: 0;
-            image-rendering: pixelated;
-        }
-
+        #pixel-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 0; image-rendering: pixelated; }
+        
         #scene {
-            width: 100vw; height: 100vh;
-            perspective: 1200px;
+            width: 100vw; height: 100vh; perspective: 1200px;
             display: flex; align-items: center; justify-content: center;
-            position: relative;
-            transform-style: preserve-3d;
-            transform: scale(0.75);
-            z-index: 10;
+            position: relative; transform-style: preserve-3d; transform: scale(0.75); z-index: 10;
         }
 
-        #carousel {
-            width: 320px; height: 520px;
-            position: absolute;
-            transform-style: preserve-3d;
-            transition: transform 0.1s linear;
-        }
-
-        .media-card {
-            position: absolute;
-            width: 320px; height: 520px;
-            left: 0; top: 0;
-            transform-style: preserve-3d;
-        }
-
-        .ipod-body {
-            position: relative;
-            width: 100%; height: 100%;
-            transform-style: preserve-3d;
-            transition: transform 0.2s;
-            cursor: pointer;
-        }
-
+        #carousel { width: 320px; height: 520px; position: absolute; transform-style: preserve-3d; transition: transform 0.1s linear; }
+        .media-card { position: absolute; width: 320px; height: 520px; left: 0; top: 0; transform-style: preserve-3d; }
+        .ipod-body { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.2s; cursor: pointer; }
         .media-card:hover .ipod-body { transform: translateY(-15px); }
 
-        .face {
-            position: absolute; box-sizing: border-box; border: 4px solid #000;
-        }
-
-        .front {
-            width: 320px; height: 520px; background: #e0e0e0;
-            transform: translateZ(15px); padding: 15px; display: flex; flex-direction: column;
-        }
-
-        .back {
-            width: 320px; height: 520px; background: #b0b0b0;
-            transform: rotateY(180deg) translateZ(15px);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-        }
-
-        .back-logo {
-            width: 50px; height: 50px; background: #000; margin-bottom: 20px;
-            clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
-        }
-
+        .face { position: absolute; box-sizing: border-box; border: 4px solid #000; }
+        .front { width: 320px; height: 520px; background: #e0e0e0; transform: translateZ(15px); padding: 15px; display: flex; flex-direction: column; }
+        .back { width: 320px; height: 520px; background: #b0b0b0; transform: rotateY(180deg) translateZ(15px); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        
+        .back-logo { width: 50px; height: 50px; background: #000; margin-bottom: 20px; clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%); }
         .back-text { color: #333; text-align: center; text-shadow: 1px 1px 0px rgba(255,255,255,0.4); }
         .back-text h2 { margin: 0; font-size: 1.8rem; letter-spacing: 2px; }
         .back-text p { margin: 5px 0; font-size: 1.5rem; }
@@ -96,23 +44,10 @@
         .top { width: 320px; height: 30px; background: #e0e0e0; left: 0; top: 245px; transform: rotateX(90deg) translateZ(260px); }
         .bottom { width: 320px; height: 30px; background: #777; left: 0; top: 245px; transform: rotateX(-90deg) translateZ(260px); }
 
-        .ipod-screen {
-            background: #000; border: 4px solid #000; height: 240px;
-            display: flex; flex-direction: column; overflow: hidden;
-            box-shadow: inset 4px 4px 8px rgba(0,0,0,0.8); pointer-events: none;
-        }
-
-        .image-container {
-            width: 100%; height: 195px; background: #111;
-            display: flex; align-items: center; justify-content: center;
-        }
-
+        .ipod-screen { background: #000; border: 4px solid #000; height: 240px; display: flex; flex-direction: column; overflow: hidden; box-shadow: inset 4px 4px 8px rgba(0,0,0,0.8); pointer-events: none; }
+        .image-container { width: 100%; height: 195px; background: #111; display: flex; align-items: center; justify-content: center; }
         .image-container video { width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; }
-
-        .image-container img.pixelated-icon {
-            width: 85% !important; height: 85% !important; object-fit: contain !important;
-            image-rendering: pixelated; padding: 10px; box-sizing: border-box; background: #050505;
-        }
+        .image-container img.pixelated-icon { width: 85% !important; height: 85% !important; object-fit: contain !important; image-rendering: pixelated; padding: 10px; box-sizing: border-box; background: #050505; }
 
         /* --- THE DYNAMIC COLORED BOXES --- */
         img.box-blue { border: 2px solid #0088ff !important; box-shadow: 0 0 10px rgba(0, 136, 255, 0.6) !important; }
@@ -122,112 +57,139 @@
         img.box-cyan { border: 2px solid #00ffff !important; box-shadow: 0 0 10px rgba(0, 255, 255, 0.6) !important; }
         img.box-pink { border: 2px solid #ff00aa !important; box-shadow: 0 0 10px rgba(255, 0, 170, 0.6) !important; }
 
-        .screen-text {
-            padding: 8px; background: #000; color: #fff; flex-grow: 1;
-            display: flex; flex-direction: column; justify-content: center;
-        }
-
+        .screen-text { padding: 8px; background: #000; color: #fff; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
         .screen-text h3 { margin: 0; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 1px; }
 
         .ipod-wheel-container { flex-grow: 1; display: flex; align-items: center; justify-content: center; pointer-events: none; }
-
-        .click-wheel {
-            width: 160px; height: 160px; background: #fff; border: 4px solid #000; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; position: relative;
-        }
-
+        .click-wheel { width: 160px; height: 160px; background: #fff; border: 4px solid #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; }
         .wheel-center { width: 50px; height: 50px; background: #e0e0e0; border: 4px solid #000; border-radius: 50%; }
-
         .wheel-label { position: absolute; font-size: 1rem; color: #888; font-weight: bold; }
         .label-top { top: 10px; } .label-bottom { bottom: 10px; } .label-left { left: 10px; } .label-right { right: 10px; }
 
         /* --- UI OVERLAYS --- */
-        #controls-info {
-            position: fixed; bottom: 20px; width: 100%; text-align: center; color: #00ff41;
-            font-size: 0.8rem; letter-spacing: 1px; text-shadow: 1px 1px 0px #000; z-index: 100; pointer-events: none; opacity: 0.6;
-        }
+        #main-title { position: fixed; top: 40px; left: 0; width: 100vw; display: flex; justify-content: center; color: #00ff41; font-size: 2.5rem; letter-spacing: 6px; text-shadow: 4px 4px 0px #000; z-index: 100; pointer-events: none; opacity: 1; margin: 0; }
+        #controls-info { position: fixed; bottom: 20px; width: 100%; text-align: center; color: #00ff41; font-size: 0.8rem; letter-spacing: 1px; text-shadow: 1px 1px 0px #000; z-index: 100; pointer-events: none; opacity: 0.6; }
 
-        .nav-arrow {
-            position: fixed; top: 50%; transform: translateY(-50%); font-size: 5rem; color: #fff;
-            text-shadow: 4px 4px 0px #00ff41; cursor: pointer; z-index: 100; padding: 20px; opacity: 0.7; transition: opacity 0.2s, transform 0.1s, color 0.2s;
-        }
+        .nav-arrow { position: fixed; top: 50%; transform: translateY(-50%); font-size: 5rem; color: #fff; text-shadow: 4px 4px 0px #00ff41; cursor: pointer; z-index: 100; padding: 20px; opacity: 0.7; transition: opacity 0.2s, transform 0.1s, color 0.2s; }
         .nav-arrow:hover { opacity: 1; color: #00ff41; text-shadow: 4px 4px 0px #fff; }
         .nav-arrow:active { transform: translateY(-50%) scale(0.9); }
         #left-arrow { left: 30px; } #right-arrow { right: 30px; }
-        
-        @keyframes arrowPop {
-            0% { transform: translateY(-50%) scale(1); }
-            50% { transform: translateY(-50%) scale(0.6); color: #fff; text-shadow: 0 0 20px #00ff41; }
-            100% { transform: translateY(-50%) scale(1); }
-        }
+        @keyframes arrowPop { 0% { transform: translateY(-50%) scale(1); } 50% { transform: translateY(-50%) scale(0.6); color: #fff; text-shadow: 0 0 20px #00ff41; } 100% { transform: translateY(-50%) scale(1); } }
         .nav-arrow.pop { animation: arrowPop 0.15s ease-out; }
 
-        /* --- MODAL --- */
-        #project-modal {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.9);
-            z-index: 999999 !important; transform: translateZ(2000px); display: flex; align-items: center; justify-content: center;
-            opacity: 0; pointer-events: none; transition: opacity 0.2s ease;
+        /* --- SMALL PIXEL ICON BUTTON --- */
+        #theme-toggle {
+            position: fixed; top: 20px; right: 30px;
+            background: #000; color: #00ff41; border: 2px solid #00ff41;
+            width: 45px; height: 45px;
+            font-family: 'VT323', monospace; font-size: 2rem;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; z-index: 10000; transition: 0.2s;
         }
+        #theme-toggle:hover { background: #00ff41; color: #000; }
+
+        /* --- DEFAULT DARK MODAL STYLES --- */
+        #project-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.9); z-index: 999999 !important; transform: translateZ(2000px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s ease; }
         #project-modal.active { opacity: 1; pointer-events: all; }
         #project-modal.active .modal-content { transform: scale(1); }
 
-        .modal-content {
-            background: #fff; border: 4px solid #000; box-shadow: 12px 12px 0px #00ff41;
-            width: 90%; max-width: 800px; max-height: 90vh; display: flex; flex-direction: column;
-            position: relative; transform: scale(0.1); transition: transform 0.25s ease-out;
-        }
-
-        .modal-header {
-            background: #000; color: #fff; padding: 10px 20px; display: flex; justify-content: space-between;
-            align-items: center; border-bottom: 4px solid #000;
-        }
-        .modal-header h2 { margin: 0; font-size: 1.8rem; }
-        .close-btn {
-            background: #ff3300; border: 4px solid #fff; color: #fff; font-family: 'VT323', monospace;
-            font-size: 1.5rem; cursor: pointer; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
-        }
+        .modal-content { background: #111; border: 4px solid #00ff41; box-shadow: 12px 12px 0px #000; width: 90%; max-width: 800px; max-height: 90vh; display: flex; flex-direction: column; position: relative; transform: scale(0.1); transition: transform 0.25s ease-out; }
+        
+        .modal-header { background: #050505; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 4px solid #00ff41; }
+        .modal-header h2 { margin: 0; font-size: 1.8rem; color: #fff; }
+        
+        .close-btn { background: #ff3300; border: 4px solid #fff; color: #fff; font-family: 'VT323', monospace; font-size: 1.5rem; cursor: pointer; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; }
         .close-btn:hover { background: #fff; color: #ff3300; border-color: #000; }
 
-        .modal-body { padding: 20px; display: flex; flex-direction: column; gap: 20px; overflow-y: auto; background: #f0f0f0; color: #000; }
-
-        .modal-main-media {
-            width: 100%; background: transparent; border: none; display: flex; flex-direction: column;
-            align-items: center; gap: 30px; padding: 0; box-sizing: border-box;
-        }
-        .modal-main-media img, .modal-main-media video {
-            width: 100%; height: auto; max-height: none; object-fit: contain; border: none; image-rendering: auto;
-        }
-
-        .modal-text { font-size: 1.3rem; line-height: 1.4; padding: 15px; background: #fff; border: 4px solid #000; }
+        .modal-body { padding: 20px; display: flex; flex-direction: column; gap: 20px; overflow-y: auto; background: #000; color: #fff; }
+        .modal-main-media { width: 100%; background: transparent; border: none; display: flex; flex-direction: column; align-items: center; gap: 30px; padding: 0; box-sizing: border-box; }
+        .modal-main-media img, .modal-main-media video { width: 100%; height: auto; max-height: none; object-fit: contain; border: none; image-rendering: auto; }
+        
+        .modal-text { font-size: 1.3rem; line-height: 1.4; padding: 15px; background: #111; border: 4px solid #00ff41; color: #ccc; }
         .modal-text a { color: #ff3300; text-decoration: underline; }
         .modal-text a:hover { color: #00ff41; background: #000; }
-        
-        #main-title {
-            position: fixed; top: 40px; left: 0; width: 100vw; display: flex; justify-content: center;
-            color: #00ff41; font-size: 2.5rem; letter-spacing: 6px; text-shadow: 4px 4px 0px #000;
-            z-index: 100; pointer-events: none; opacity: 1; margin: 0;
-        }
 
         /* --- SCROLLING GALLERY --- */
         .work-item { width: 100%; margin-bottom: 50px; display: flex; flex-direction: column; align-items: center; }
-        .work-title {
-            color: #00ff41; font-size: 1.5rem; margin: 0 0 15px 0; text-transform: uppercase;
-            letter-spacing: 2px; text-align: center; background: #000; padding: 5px 15px; border: 2px solid #00ff41; box-shadow: 4px 4px 0px #000;
-        }
-        .work-desc {
-            color: #333; font-size: 1.2rem; text-align: center; margin: 15px 0 0 0; max-width: 90%; line-height: 1.4;
-        }
-        .work-desc a.store-link {
-            color: #000; text-decoration: none; font-weight: bold; display: inline-block;
-            margin-top: 8px; border-bottom: 1px dashed #000; transition: all 0.2s ease;
-        }
-        .work-desc a.store-link:hover { color: #ff3300; border-bottom: 1px solid #ff3300; }
+        .work-title { color: #00ff41; font-size: 1.5rem; margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 2px; text-align: center; background: #000; padding: 5px 15px; border: 2px solid #00ff41; box-shadow: 4px 4px 0px #000; }
+        .work-desc { color: #ccc; font-size: 1.2rem; text-align: center; margin: 15px 0 0 0; max-width: 90%; line-height: 1.4; }
+        .work-desc a.store-link { color: #00ff41; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 8px; border-bottom: 1px dashed #00ff41; transition: all 0.2s ease; }
+        .work-desc a.store-link:hover { color: #fff; border-bottom: 1px solid #fff; }
 
+        /* --- SPECIFIC IMAGE STYLES --- */
         img.profile-pic { width: 300px !important; height: auto !important; border: 2px solid #00ff41 !important; margin: 0 auto; }
+        .apple-icon { border-radius: 22.5% !important; overflow: hidden !important; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+
+        /* --- THE LIGHT MODE OVERRIDES --- */
+        body.light-mode { background-color: #f0f0f0; background-image: linear-gradient(#ddd 2px, transparent 2px), linear-gradient(90deg, #ddd 2px, transparent 2px); color: #000; }
+        body.light-mode #main-title { color: #000; text-shadow: 4px 4px 0px #00ff41; }
+        body.light-mode #controls-info { color: #000; text-shadow: 1px 1px 0px #fff; }
+        body.light-mode .nav-arrow { color: #000; text-shadow: 4px 4px 0px #00ff41; }
+        body.light-mode .nav-arrow:hover { color: #00ff41; text-shadow: 4px 4px 0px #000; }
+        
+        /* --- SMALL PIXEL ICON BUTTONS (TOP CORNERS) --- */
+        .top-corner-btn {
+            position: fixed; top: 20px;
+            background: #000; color: #00ff41; border: 2px solid #00ff41;
+            width: 35px; height: 35px; /* Shrunk down to a neat little square! */
+            font-family: 'VT323', monospace; font-size: 1.5rem;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; z-index: 10000; transition: 0.2s; text-decoration: none;
+        }
+        .top-corner-btn:hover { background: #00ff41; color: #000; }
+        
+        /* Top corner buttons when in Light Mode */
+        body.light-mode .top-corner-btn { background: #fff; color: #000; border-color: #000; }
+        body.light-mode .top-corner-btn:hover { background: #000; color: #fff; }
+        #contact-btn { left: 30px; padding-bottom: 2px; } /* padding offsets the envelope vertically so it looks centered */
+
+        body.light-mode .modal-content { background: #fff; border: 4px solid #000; box-shadow: 12px 12px 0px #00ff41; }
+        body.light-mode .modal-header { background: #000; border-bottom: 4px solid #000; }
+        body.light-mode .modal-header h2 { color: #fff; }
+        body.light-mode .modal-body { background: #f9f9f9; color: #000; }
+        body.light-mode .modal-text { background: #fff; border: 4px solid #000; color: #000; }
+        body.light-mode .work-title { background: #fff; color: #000; border: 2px solid #000; box-shadow: 4px 4px 0px #00ff41; }
+        body.light-mode .work-desc { color: #333; }
+        body.light-mode .work-desc a.store-link { color: #000; border-bottom: 1px dashed #000; }
+        body.light-mode .work-desc a.store-link:hover { color: #ff3300; border-bottom: 1px solid #ff3300; }
+        /* --- THE ULTIMATE INVERSION: DARK IPODS IN LIGHT MODE --- */
+        
+        /* 1. Make the iPod body dark grey/black */
+        body.light-mode .front,
+        body.light-mode .top,
+        body.light-mode .wheel-center { background: #222; }
+        body.light-mode .back { background: #111; }
+        body.light-mode .left { background: #1a1a1a; }
+        body.light-mode .right { background: #0a0a0a; }
+        body.light-mode .bottom { background: #050505; }
+        
+        /* 2. Darken the Click Wheel */
+        body.light-mode .click-wheel { background: #111; border-color: #000; }
+        body.light-mode .wheel-label { color: #666; }
+        
+        /* 3. Invert the Back text and logo so it pops on the dark back */
+        body.light-mode .back-logo { background: #00ff41; } /* Apple logo turns green */
+        body.light-mode .back-text h2,
+        body.light-mode .back-text p { color: #fff; text-shadow: none; }
+        body.light-mode .back-text .details { opacity: 0.5; color: #fff; }
+
+        /* 4. Invert the Screen Backgrounds */
+        body.light-mode .ipod-screen { border-color: #000; }
+        body.light-mode .image-container { background: #e0e0e0; }
+        body.light-mode .screen-text { background: #d0d0d0; color: #000; }
+        
+        /* 5. THE MAGIC TRICK: Invert the images AND the neon boxes instantly */
+        body.light-mode img.pixelated-icon {
+            /* This flips black to white, white to black, and flips every neon color to its exact opposite! */
+            filter: invert(1) hue-rotate(180deg);
+        }
     </style>
 </head>
 <body>
     <div id="main-title">ALI MURTAZA // portfolio</div>
+    
+    <a href="mailto:alixmurtazx@gmail.com" class="top-corner-btn" id="contact-btn" title="Email Me">✉</a>
+    <button class="top-corner-btn" id="theme-toggle" title="Toggle Theme">☼</button>
     <canvas id="pixel-canvas"></canvas>
     <div id="controls-info">USE LEFT + RIGHT KEYS TO ROTATE // CLICK iPOD TO SEE MORE</div>
 
@@ -266,7 +228,7 @@
                 <div class="gallery-assets" style="display: none;">
                     <div class="work-item">
                         <h4 class="work-title">Planet Buddy!</h4>
-                        <img src="challenge1.png" alt="Challenge 1 Showcase">
+                        <img src="challenge1.png" alt="Challenge 1 Showcase" class="apple-icon">
                         <p class="work-desc">
                             For the first challenge of the Apple Developer Academy, we aimed to create a gamified learning experience for children to help them learn some basic facts about the most popular animals from each continent. I made 3d low-poly models of the animals and a 3d model of the globe.
                             <br><a href="https://github.com/io1711/PlanetBuddy" target="_blank" class="store-link">[Github Link]</a>
@@ -373,7 +335,7 @@
                 <div class="gallery-assets" style="display: none;">
                     <div class="work-item">
                         <h4 class="work-title">Bug Buddies Icons</h4>
-                        <img src="appicons.jpg" alt="App Icons UI">
+                        <img src="appicons.jpg" alt="App Icons UI" class="apple-icon">
                         <p class="work-desc">Moving away from standard 3D assets to a highly expressive 2D drawing style for app UI.</p>
                     </div>
                     <div class="work-item">
@@ -459,7 +421,7 @@
 
         function animateCanvas() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#ffffff';
+            ctx.fillStyle = document.body.classList.contains('light-mode') ? '#000000' : '#ffffff';
             for(let i = 0; i < dust.length; i++) {
                 let d = dust[i];
                 let dx = d.x - mouseX; let dy = d.y - mouseY; let dist = Math.sqrt(dx * dx + dy * dy);
@@ -468,7 +430,7 @@
                     d.vy += (dy / dist) * force * 1.5;
                 }
                 d.vx = d.vx * 0.80 + d.baseVx * 0.20;
-                                d.vy = d.vy * 0.80 + d.baseVy * 0.20;
+                d.vy = d.vy * 0.80 + d.baseVy * 0.20;
                 d.x += d.vx; d.y += d.vy;
                 if(d.x < 0) d.x = canvas.width; if(d.x > canvas.width) d.x = 0;
                 if(d.y < 0) d.y = canvas.height; if(d.y > canvas.height) d.y = 0;
@@ -578,6 +540,17 @@
 
         window.addEventListener('touchend', () => {
             if (!isDragging) return; isDragging = false; updateRotation();
+        });
+
+        // --- 3. THEME TOGGLE LOGIC ---
+        const themeBtn = document.getElementById('theme-toggle');
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            if(document.body.classList.contains('light-mode')) {
+                themeBtn.innerText = '☾';
+            } else {
+                themeBtn.innerText = '☼';
+            }
         });
 
     </script>
