@@ -106,8 +106,14 @@
         .modal-main-media img, .modal-main-media video { width: 100%; height: auto; max-height: none; object-fit: contain; border: none; image-rendering: auto; }
         
         .modal-text { font-size: 1.3rem; line-height: 1.4; padding: 15px; background: #111; border: 4px solid #00ff41; color: #ccc; }
-        .modal-text a { color: #ff3300; text-decoration: underline; }
-        .modal-text a:hover { color: #00ff41; background: #000; }
+        .modal-text a { color: #00ff41; text-decoration: underline; }
+        .modal-text a:hover { color: #ff3300; background: #000; }
+        /* --- TERMINAL HEADINGS --- */
+        /* --- TERMINAL HEADINGS --- */
+        .term-heading {
+            color: #00ff41; /* Solid signature green, no cringe glow */
+            font-weight: bold;
+        }
 
         /* --- SCROLLING GALLERY --- */
         .work-item { width: 100%; margin-bottom: 50px; display: flex; flex-direction: column; align-items: center; }
@@ -126,6 +132,8 @@
         body.light-mode #controls-info { color: #000; text-shadow: 1px 1px 0px #fff; }
         body.light-mode .nav-arrow { color: #000; text-shadow: 4px 4px 0px #00ff41; }
         body.light-mode .nav-arrow:hover { color: #00ff41; text-shadow: 4px 4px 0px #000; }
+        /* Light mode override for headings */
+        body.light-mode .term-heading { color: #555555; /* Simple dark grey for light mode */ }
         
         /* --- SMALL PIXEL ICON BUTTONS (TOP CORNERS) --- */
         .top-corner-btn {
@@ -233,7 +241,7 @@
     <div id="scene">
         <div id="carousel">
             
-            <div class="media-card" data-fulltext="Multidisciplinary artist/designer who codes just enough to make things work. I am passionate about 3d modelling + animation, game design and creating my own art, characters and environments to build inside apps and games.<br><br> <a href='mailto: alixmurtazx@gmail.com'>Email Me</a><br> <a href='CV2026 - Ali Murtaza.pdf' target='_blank'>Download CV</a><br> <a href='https://linkedin.com/in/alimurtazx' target='_blank'>LinkedIn</a><br> <a href='https://instagram.com/ali_murtazaa' target='_blank'>Instagram</a>">
+            <div class="media-card" data-fulltext="> Multidisciplinary artist/designer who codes enough to make things work (like this website for example) and still learning. I am passionate about 3d modelling + animation, game design and creating my own art, characters and environments to build inside apps and games.<br><br><span class='term-heading'>[ TECH & DESIGN EXPERIENCE ]</span><br>2025-26 | Apple Developer Academy, IT<br>- iOS Dev & Designer. UI/UX, Animation, 2D+3D.<br><br>2023 | Aror University of Art, PK<br>- Art Teacher for BFA students in a public art & design university.<br><br>2022 | Karachi Biennale, PK<br>- Assistant Curator. Tech-art installations & logistics.<br><br>2019-21 | Cosmos Creative Studios, PK<br>- Creative Head. Art direction & execution.<br><br><span class='term-heading'>[ EDUCATION ]</span><br>2023-26 | MFA, Accademia di Belle Arti Napoli, IT<br>- Bridging physical arts with digital interactions.<br><br>- Erasmus+ @ ENSAPC, Paris, FR (2025).<br><br>2017-22 | BFA, SABSU, PK<br>- Researching, experimenting and creating my own visual identity using experimental traditional and new media art practices.<br><br><span class='term-heading'>[ SOFTWARE STACK ]</span><br>Blender, Unity, Figma, Procreate, Adobe CC.<br><br><br><a href='mailto:alixmurtazx@gmail.com'>Email Me</a><br><a href='CV2026 - Ali Murtaza.pdf' target='_blank'>CV</a><br><a href='https://linkedin.com/in/alimurtazx' target='_blank'>LinkedIn</a><br><a href='https://instagram.com/ali_murtazaa' target='_blank'>Instagram</a>">
                 <div class="gallery-assets" style="display: none;">
                     <div class="work-item">
                         <img src="portrait.png" alt="Ali Murtaza" class="profile-pic">
@@ -572,7 +580,12 @@
                 const galleryElement = card.querySelector('.gallery-assets');
                 const mediaHTML = galleryElement ? galleryElement.innerHTML : card.querySelector('.image-container').innerHTML;
 
-                modalTitle.innerText = title + ".EXE";
+                // Check if it's the Profile card
+                if (title === 'PROFILE') {
+                    modalTitle.innerText = "ALI MURTAZA NAZAR.EXE";
+                } else {
+                    modalTitle.innerText = title + ".EXE";
+                }
                 modalDesc.innerHTML = fullText;
                 modalMedia.innerHTML = mediaHTML;
                 modal.classList.add('active');
