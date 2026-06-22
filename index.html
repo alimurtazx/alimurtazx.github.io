@@ -183,6 +183,40 @@
             /* This flips black to white, white to black, and flips every neon color to its exact opposite! */
             filter: invert(1) hue-rotate(180deg);
         }
+        /* ========================================= */
+        /* --- MOBILE RESPONSIVE FIXES (PHONES) ---  */
+        /* ========================================= */
+        @media (max-width: 768px) {
+            /* 1. Shrink the entire 3D carousel so the side iPods fit on screen */
+            #scene { transform: scale(0.55); }
+
+            /* 2. Fix the title size and push it down so it clears the buttons */
+            #main-title {
+                font-size: 1.5rem;
+                letter-spacing: 2px;
+                top: 75px;
+                text-align: center;
+                width: 100vw;
+            }
+
+            /* 3. Make the side arrows smaller and tuck them closer to the edges */
+            .nav-arrow { font-size: 3rem; padding: 10px; }
+            #left-arrow { left: 0px; }
+            #right-arrow { right: 0px; }
+
+            /* 4. Shrink the top corner buttons slightly to save screen real estate */
+            .top-corner-btn { width: 32px; height: 32px; font-size: 1.2rem; top: 15px; }
+            #contact-btn { left: 15px; }
+            #theme-toggle { right: 15px; }
+
+            /* 5. Shrink the bottom text */
+            #controls-info { font-size: 0.65rem; bottom: 10px; }
+            
+            /* 6. Ensure the popup modal doesn't bleed off the screen */
+            .modal-content { width: 95%; max-height: 85vh; }
+            .modal-header h2 { font-size: 1.4rem; }
+            .modal-body { padding: 15px; }
+        }
     </style>
 </head>
 <body>
@@ -202,7 +236,7 @@
             <div class="media-card" data-fulltext="Multidisciplinary artist/designer who codes just enough to make things work. I am passionate about 3d modelling + animation, game design and creating my own art, characters and environments to build inside apps and games.<br><br> <a href='mailto: alixmurtazx@gmail.com'>Email Me</a><br> <a href='CV2026 - Ali Murtaza.pdf' target='_blank'>Download CV</a><br> <a href='https://linkedin.com/in/alimurtazx' target='_blank'>LinkedIn</a><br> <a href='https://instagram.com/ali_murtazaa' target='_blank'>Instagram</a>">
                 <div class="gallery-assets" style="display: none;">
                     <div class="work-item">
-                        <img src="ali-pic.png" alt="Ali Murtaza" class="profile-pic">
+                        <img src="portrait.png" alt="Ali Murtaza" class="profile-pic">
                     </div>
                 </div>
                 <div class="ipod-body">
