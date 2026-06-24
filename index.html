@@ -200,7 +200,13 @@
         .work-desc a.store-link:hover { color: #fff; border-bottom: 1px solid #fff; }
 
         /* --- SPECIFIC IMAGE STYLES --- */
-        img.profile-pic { width: 300px !important; height: auto !important; border: 2px solid #00ff41 !important; margin: 0 auto; }
+        img.profile-pic { width: 300px !important; height: auto !important; border: 2px solid #00ff41 !important; margin: 0 0 15px 0 !important; }
+        /* This forces the profile pic to stay small and ignore the 100% stretch rule */
+        .modal-main-media img.profile-pic {
+            width: 290px !important;
+            max-width: 290px !important;
+            margin: 0 auto !important;
+        }
         
         /* FIX: The App Store icon style! Strict lockdown on dimensions */
         .apple-icon {
