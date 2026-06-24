@@ -96,7 +96,10 @@
         }
         .top-corner-btn:hover { background: #00ff41; color: #000; }
         #contact-btn { left: 30px; }
-        #theme-toggle { right: 30px; }
+        #theme-toggle {
+            right: 30px;
+            padding-top: 3px !important; /* This nudges the sun icon down slightly */
+        }
 
         /* --- DEFAULT DARK MODAL STYLES --- */
         #project-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.9); z-index: 999999 !important; transform: translateZ(2000px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s ease; }
@@ -283,7 +286,7 @@
 <body>
     <div id="main-title">ALI MURTAZA // portfolio</div>
     
-    <a href="mailto:alixmurtazx@gmail.com" class="top-corner-btn" id="contact-btn" title="Email Me">✨</a>
+    <a href="mailto:alixmurtazx@gmail.com" class="top-corner-btn" id="contact-btn" title="Email Me">✉</a>
     <button class="top-corner-btn" id="theme-toggle" title="Toggle Theme">☼</button>
     <canvas id="pixel-canvas"></canvas>
     <div id="controls-info">USE LEFT + RIGHT KEYS TO ROTATE // CLICK iPOD TO SEE MORE</div>
