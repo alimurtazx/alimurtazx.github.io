@@ -77,16 +77,26 @@
         @keyframes arrowPop { 0% { transform: translateY(-50%) scale(1); } 50% { transform: translateY(-50%) scale(0.6); color: #fff; text-shadow: 0 0 20px #00ff41; } 100% { transform: translateY(-50%) scale(1); } }
         .nav-arrow.pop { animation: arrowPop 0.15s ease-out; }
 
-        /* --- SMALL PIXEL ICON BUTTON --- */
-        #theme-toggle {
-            position: fixed; top: 20px; right: 30px;
+        /* --- UNIFIED PIXEL ICON BUTTONS (TOP CORNERS) --- */
+        .top-corner-btn {
+            position: fixed; top: 20px;
             background: #000; color: #00ff41; border: 2px solid #00ff41;
-            width: 45px; height: 45px;
-            font-family: 'VT323', monospace; font-size: 2rem;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; z-index: 10000; transition: 0.2s;
+            width: 35px; height: 35px;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-family: 'VT323', monospace; font-size: 1.2rem;
+            cursor: pointer; z-index: 10000; transition: 0.2s; text-decoration: none;
+            
+            box-sizing: border-box !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            line-height: 0;
+            appearance: none;
+            -webkit-appearance: none;
+            border-radius: 0;
         }
-        #theme-toggle:hover { background: #00ff41; color: #000; }
+        .top-corner-btn:hover { background: #00ff41; color: #000; }
+        #contact-btn { left: 30px; }
+        #theme-toggle { right: 30px; }
 
         /* --- DEFAULT DARK MODAL STYLES --- */
         #project-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.9); z-index: 999999 !important; transform: translateZ(2000px); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s ease; }
@@ -102,36 +112,105 @@
         .close-btn:hover { background: #fff; color: #ff3300; border-color: #000; }
 
         .modal-body { padding: 20px; display: flex; flex-direction: column; gap: 20px; overflow-y: auto; background: #000; color: #fff; }
-        .modal-main-media { width: 100%; background: transparent; border: none; display: flex; flex-direction: column; align-items: center; gap: 30px; padding: 0; box-sizing: border-box; }
-        .modal-main-media img, .modal-main-media video { width: 100%; height: auto; max-height: none; object-fit: contain; border: none; image-rendering: auto; }
+        .modal-main-media { width: 100%; background: transparent; border: none; display: flex; flex-direction: column; align-items: center; padding: 0; box-sizing: border-box; }
+        
+        /* FIX: Prevents the global rule from stretching the app-list icons OR the big apple-icons! */
+        .modal-main-media img:not(.app-list-icon):not(.apple-icon), .modal-main-media video {
+            width: 100% !important;
+            height: auto !important;
+            max-height: none;
+            object-fit: contain;
+            border: none;
+            image-rendering: auto;
+        }
         
         .modal-text { font-size: 1.3rem; line-height: 1.4; padding: 15px; background: #111; border: 4px solid #00ff41; color: #ccc; }
         .modal-text a { color: #00ff41; text-decoration: underline; }
         .modal-text a:hover { color: #ff3300; background: #000; }
+
         /* --- TERMINAL HEADINGS --- */
-        /* --- TERMINAL HEADINGS --- */
-        .term-heading {
-            color: #00ff41; /* Solid signature green, no cringe glow */
-            font-weight: bold;
+        .term-heading { color: #00ff41; font-weight: bold; }
+
+        /* --- PROJECT CONTAINER BOXES (GREY BORDERS FOR OTHER CARDS) --- */
+        .project-box {
+            border: 2px solid #333; background: #0f0f0f; padding: 15px; margin-bottom: 30px;
+            display: flex; flex-direction: column; align-items: center; box-sizing: border-box; width: 100%;
+        }
+        
+        /* FIX: Don't stretch the apple-icon if it happens to be inside a grey box */
+        .project-box img:not(.apple-icon), .project-box video {
+            width: 100% !important; max-width: 100% !important; height: auto !important; margin-bottom: 15px;
         }
 
-        /* --- SCROLLING GALLERY --- */
-        .work-item { width: 100%; margin-bottom: 50px; display: flex; flex-direction: column; align-items: center; }
+
+        /* ======================================================== */
+        /* --- PURE MINIMALIST TEXT LIST (FOR APPS/GAMES) ---       */
+        /* ======================================================== */
+        .app-list-container { width: 100%; display: flex; flex-direction: column; }
+        
+        .app-list-item { width: 100%; border-bottom: 1px solid #333; }
+        .app-list-item:last-child { border-bottom: none; }
+        
+        .app-list-item summary {
+            display: flex; align-items: center; padding: 15px 0;
+            cursor: pointer; background: transparent;
+            list-style: none; user-select: none; transition: 0.2s ease;
+        }
+        .app-list-item summary::-webkit-details-marker { display: none; }
+        
+        .app-list-item summary:hover .app-list-title { color: #fff; text-shadow: 0 0 5px #00ff41; }
+        .app-list-item summary:hover .app-list-toggle { color: #fff; }
+        
+        /* Tiny icons in the unexpanded list header */
+        .app-list-icon {
+            width: 35px !important;
+            height: 35px !important;
+            max-width: 35px !important;
+            min-width: 35px !important;
+            border-radius: 6px !important;
+            margin-right: 15px !important;
+            margin-bottom: 0 !important;
+            object-fit: cover !important;
+            border: 1px solid #333 !important;
+            display: block !important;
+        }
+        
+        .app-list-title { color: #00ff41; font-size: 1.4rem; flex-grow: 1; text-transform: uppercase; margin: 0; transition: 0.2s; }
+        
+        .app-list-toggle { color: #00ff41; font-size: 1.5rem; transition: 0.2s; line-height: 1; margin-left: auto; }
+        .app-list-item:not([open]) .app-list-toggle::after { content: "+"; }
+        .app-list-item[open] .app-list-toggle::after { content: "-"; }
+
+        .app-list-content { padding: 15px 0 25px 0; display: flex; flex-direction: column; align-items: center; border-top: 1px dashed #333; }
+        
+        /* FIX: Stretch screenshots, but strictly IGNORE the .apple-icon */
+        .app-list-content img:not(.apple-icon), .app-list-content video {
+            width: 100% !important; max-width: 100% !important; height: auto !important; margin-bottom: 15px; border: 1px solid #222;
+        }
+        /* ======================================================== */
+
+
+        /* --- GENERAL GALLERY STYLES --- */
         .work-title { color: #00ff41; font-size: 1.5rem; margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 2px; text-align: center; background: #000; padding: 5px 15px; border: 2px solid #00ff41; box-shadow: 4px 4px 0px #000; }
-        .work-desc { color: #ccc; font-size: 1.2rem; text-align: center; margin: 15px 0 0 0; max-width: 90%; line-height: 1.4; }
+        .work-desc { color: #ccc; font-size: 1.2rem; text-align: center; margin: 0 0 15px 0; max-width: 90%; line-height: 1.4; }
         .work-desc a.store-link { color: #00ff41; text-decoration: none; font-weight: bold; display: inline-block; margin-top: 8px; border-bottom: 1px dashed #00ff41; transition: all 0.2s ease; }
         .work-desc a.store-link:hover { color: #fff; border-bottom: 1px solid #fff; }
 
         /* --- SPECIFIC IMAGE STYLES --- */
         img.profile-pic { width: 300px !important; height: auto !important; border: 2px solid #00ff41 !important; margin: 0 auto; }
         
+        /* FIX: The App Store icon style! Strict lockdown on dimensions */
         .apple-icon {
+            width: 150px !important;
+            height: 150px !important;
+            max-width: 150px !important;
             border-radius: 22.5% !important;
             overflow: hidden !important;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            max-width: 180px !important; /* Stops the icon from blowing up */
-            margin: 0 auto !important; /* Keeps it perfectly centered */
-            display: block;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5) !important;
+            margin: 0 auto 20px auto !important;
+            display: block !important;
+            border: none !important;
+            object-fit: cover !important;
         }
 
         /* --- THE LIGHT MODE OVERRIDES --- */
@@ -140,24 +219,11 @@
         body.light-mode #controls-info { color: #000; text-shadow: 1px 1px 0px #fff; }
         body.light-mode .nav-arrow { color: #000; text-shadow: 4px 4px 0px #00ff41; }
         body.light-mode .nav-arrow:hover { color: #00ff41; text-shadow: 4px 4px 0px #000; }
-        /* Light mode override for headings */
-        body.light-mode .term-heading { color: #555555; /* Simple dark grey for light mode */ }
         
-        /* --- SMALL PIXEL ICON BUTTONS (TOP CORNERS) --- */
-        .top-corner-btn {
-            position: fixed; top: 20px;
-            background: #000; color: #00ff41; border: 2px solid #00ff41;
-            width: 35px; height: 35px; /* Shrunk down to a neat little square! */
-            font-family: 'VT323', monospace; font-size: 1.5rem;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; z-index: 10000; transition: 0.2s; text-decoration: none;
-        }
-        .top-corner-btn:hover { background: #00ff41; color: #000; }
+        body.light-mode .term-heading { color: #555555; }
         
-        /* Top corner buttons when in Light Mode */
         body.light-mode .top-corner-btn { background: #fff; color: #000; border-color: #000; }
         body.light-mode .top-corner-btn:hover { background: #000; color: #fff; }
-        #contact-btn { left: 30px; padding-bottom: 2px; } /* padding offsets the envelope vertically so it looks centered */
 
         body.light-mode .modal-content { background: #fff; border: 4px solid #000; box-shadow: 12px 12px 0px #00ff41; }
         body.light-mode .modal-header { background: #000; border-bottom: 4px solid #000; }
@@ -168,96 +234,56 @@
         body.light-mode .work-desc { color: #333; }
         body.light-mode .work-desc a.store-link { color: #000; border-bottom: 1px dashed #000; }
         body.light-mode .work-desc a.store-link:hover { color: #ff3300; border-bottom: 1px solid #ff3300; }
-        /* --- THE ULTIMATE INVERSION: DARK IPODS IN LIGHT MODE --- */
         
-        /* 1. Make the iPod body dark grey/black */
-        body.light-mode .front,
-        body.light-mode .top,
-        body.light-mode .wheel-center { background: #222; }
+        body.light-mode .project-box { background: #fff; border-color: #ccc; }
+        
+        /* Light mode minimal app list overrides */
+        body.light-mode .app-list-item { border-bottom: 1px solid #ccc; }
+        body.light-mode .app-list-title, body.light-mode .app-list-toggle { color: #000; }
+        body.light-mode .app-list-item summary:hover .app-list-title { color: #ff3300; text-shadow: none; }
+        body.light-mode .app-list-item summary:hover .app-list-toggle { color: #ff3300; }
+        body.light-mode .app-list-content { border-top: 1px dashed #ccc; }
+        body.light-mode .app-list-content img:not(.apple-icon), body.light-mode .app-list-content video { border: 1px solid #ccc; }
+
+        /* --- THE ULTIMATE INVERSION: DARK IPODS IN LIGHT MODE --- */
+        body.light-mode .front, body.light-mode .top, body.light-mode .wheel-center { background: #222; }
         body.light-mode .back { background: #111; }
         body.light-mode .left { background: #1a1a1a; }
         body.light-mode .right { background: #0a0a0a; }
         body.light-mode .bottom { background: #050505; }
-        
-        /* 2. Darken the Click Wheel */
         body.light-mode .click-wheel { background: #111; border-color: #000; }
         body.light-mode .wheel-label { color: #666; }
-        
-        /* 3. Invert the Back text and logo so it pops on the dark back */
-        body.light-mode .back-logo { background: #00ff41; } /* Apple logo turns green */
-        body.light-mode .back-text h2,
-        body.light-mode .back-text p { color: #fff; text-shadow: none; }
+        body.light-mode .back-logo { background: #00ff41; }
+        body.light-mode .back-text h2, body.light-mode .back-text p { color: #fff; text-shadow: none; }
         body.light-mode .back-text .details { opacity: 0.5; color: #fff; }
-
-        /* 4. Invert the Screen Backgrounds */
         body.light-mode .ipod-screen { border-color: #000; }
         body.light-mode .image-container { background: #e0e0e0; }
         body.light-mode .screen-text { background: #d0d0d0; color: #000; }
-        
-        /* 5. THE MAGIC TRICK: Invert the images AND the neon boxes instantly */
-        body.light-mode img.pixelated-icon {
-            /* This flips black to white, white to black, and flips every neon color to its exact opposite! */
-            filter: invert(1) hue-rotate(180deg);
-        }
+        body.light-mode img.pixelated-icon { filter: invert(1) hue-rotate(180deg); }
+
         /* ========================================= */
         /* --- MOBILE RESPONSIVE FIXES (PHONES) ---  */
         /* ========================================= */
         @media (max-width: 768px) {
-            /* 1. Shrink the entire 3D carousel so the side iPods fit on screen */
             #scene { transform: scale(0.55); }
-
-            /* 2. Fix the title size and push it down so it clears the buttons */
-            #main-title {
-                font-size: 1.5rem;
-                letter-spacing: 2px;
-                top: 75px;
-                text-align: center;
-                width: 100vw;
-            }
-
-            /* 3. Make the side arrows smaller and tuck them closer to the edges */
+            #main-title { font-size: 1.5rem; letter-spacing: 2px; top: 75px; text-align: center; width: 100vw; }
             .nav-arrow { font-size: 3rem; padding: 10px; }
             #left-arrow { left: 0px; }
             #right-arrow { right: 0px; }
-
-            /* 4. Shrink the top corner buttons slightly to save screen real estate */
             .top-corner-btn { width: 32px; height: 32px; font-size: 1.2rem; top: 15px; }
             #contact-btn { left: 15px; }
             #theme-toggle { right: 15px; }
-
-            /* 5. Shrink the bottom text */
             #controls-info { font-size: 0.65rem; bottom: 10px; }
-            
-            /* 6. Ensure the popup modal doesn't bleed off the screen */
             .modal-content { width: 95%; max-height: 85vh; }
             .modal-header h2 { font-size: 1.4rem; }
             .modal-body { padding: 15px; }
-        }
-        /* --- PROJECT CONTAINER BOXES --- */
-        .project-box {
-            border: 2px solid #333; /* Greyish line */
-            background: #0f0f0f; /* Slightly lighter than pure black */
-            padding: 15px;
-            margin-bottom: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            box-sizing: border-box;
-            width: 100%;
-        }
-        
-        /* Ensure images and videos fit the box */
-        .project-box img, .project-box video {
-            width: 100% !important;
-            max-width: 100% !important;
-            height: auto !important;
         }
     </style>
 </head>
 <body>
     <div id="main-title">ALI MURTAZA // portfolio</div>
     
-    <a href="mailto:alixmurtazx@gmail.com" class="top-corner-btn" id="contact-btn" title="Email Me">✉</a>
+    <a href="mailto:alixmurtazx@gmail.com" class="top-corner-btn" id="contact-btn" title="Email Me">✨</a>
     <button class="top-corner-btn" id="theme-toggle" title="Toggle Theme">☼</button>
     <canvas id="pixel-canvas"></canvas>
     <div id="controls-info">USE LEFT + RIGHT KEYS TO ROTATE // CLICK iPOD TO SEE MORE</div>
@@ -270,7 +296,7 @@
             
             <div class="media-card" data-fulltext="> Multidisciplinary artist/designer who codes enough to make things work (like this website for example) and learning more. I practice 3d modelling + animations, game design and creating my own art, characters and environments to build inside apps and games.<br><br><span class='term-heading'>[ EXPERIENCE IN TECH & DESIGN ]</span><br><br>2019-Present | Freelance<br>- Illustrations, 2d+3d animations, Concept design, storyboarding, graphic design, photography and tattoos<br><br>2023 | Aror University of Art, Architecture, Design & Heritages, PK<br>- Art Teacher for BFA students in a public art & design university.<br><br>2022 | Karachi Biennale, PK<br>- Assistant Curatorial Team. Tech-art installations & logistics.<br><br>2019-21 | Cosmos Creative Studios, PK<br>- Creative Head. Art direction & execution.<br><br><span class='term-heading'>[ EDUCATION ]</span><br><br>2025-26 | Apple Developer Academy, Napoli, IT<br>- Learning and practising iOS Dev & Design, Swift, UI/UX, Animation, 2D+3D.<br><br>2023-26 | MFA @ Accademia di Belle Arti Napoli, IT<br>- Bridging physical arts with digital interactions.<br><br>2025 | Erasmus+ <br>@ ENSAPC, Paris, FR.<br><br>2017-22 | BFA @ SABS University of Art, Design & Heritages, PK<br>- Researching, experimenting and creating my own visual identity using experimental traditional and new media art practices.<br><br><span class='term-heading'>[ SOFTWARE STACK ]</span><br><br>Blender, Unity, Figma, Procreate, Adobe CC.<br><br><br><a href='mailto:alixmurtazx@gmail.com'>Email Me</a><br><a href='CV2026 - Ali Murtaza.pdf' target='_blank'>CV</a><br><a href='https://linkedin.com/in/alimurtazx' target='_blank'>LinkedIn</a><br><a href='https://instagram.com/ali_murtazaa' target='_blank'>Instagram</a>">
                 <div class="gallery-assets" style="display: none;">
-                    <div class="work-item">
+                    <div class="project-box">
                         <img src="portrait.png" alt="Ali Murtaza" class="profile-pic">
                     </div>
                 </div>
@@ -295,89 +321,98 @@
 
             <div class="media-card" data-fulltext="A collection of applications and games developed during the Apple Developer Academy.">
                 <div class="gallery-assets" style="display: none;">
-                    <div class="work-item">
-                        <h4 class="work-title">01: WWF Astroni - Immersive Journey</h4>
-                        <img src="app icon dark.png" alt="Challenge 7 Showcase" class="apple-icon">
-                        <p class="work-desc">
-                            For the last challenge of the Apple Developer Academy, we aimed to create this app to enhance the experience of the beautiful site of Astroni to provide visitors with navigation with points of interest, some AR experiences, 2d & 3d model to locate themselves and find the directions to their track or points of interest. I created the assets for this project including the accurate topographical interactive 3d map of Astroni, AR experiences, UI/UX, flow and app icon.
-                            <br>
-                            <a href="https://github.com/alimurtazx/Astroni" target="_blank" class="store-link">[Link to Github]</a>
-                            <br>
-                            <br>
-                            <video src="3D Map Astroni.mp4" autoplay loop muted playsinline></video><br>
-                            <br>
-                            <video src="lava.mp4" autoplay loop muted playsinline></video><br><br>
-                            <video src="AR lava testing1.mp4" autoplay loop muted playsinline></video><br>
-                            <video src="challenge7.mov" autoplay loop muted playsinline></video>
+                    
+                    <div class="app-list-container">
+                        <details class="app-list-item">
+                            <summary>
+                                <img src="app icon dark.png" class="app-list-icon" alt="Astroni Icon">
+                                <span class="app-list-title">01: WWF Astroni</span>
+                                <span class="app-list-toggle"></span>
+                            </summary>
+                            <div class="app-list-content">
+                                <img src="app icon dark.png" class="apple-icon" alt="Astroni Full App Icon">
+                                
+                                <p class="work-desc">
+                                    For the last challenge of the Apple Developer Academy, we aimed to create this app to enhance the experience of the beautiful site of Astroni to provide visitors with navigation with points of interest, some AR experiences, 2d & 3d model to locate themselves and find the directions to their track or points of interest. I created the assets for this project including the accurate topographical interactive 3d map of Astroni, AR experiences, UI/UX, flow and app icon.<br><br>
+                                    <a href="https://github.com/alimurtazx/Astroni" target="_blank" class="store-link">[Link to Github]</a>
+                                </p>
+                                <video src="3D Map Astroni.mp4" autoplay loop muted playsinline></video>
+                                <video src="lava.mp4" autoplay loop muted playsinline></video>
+                                <video src="AR lava testing1.mp4" autoplay loop muted playsinline></video>
+                                <video src="challenge7.mov" autoplay loop muted playsinline></video>
+                                <p class="work-desc">Testing of 3d map and AR of lava within the app</p>
+                            </div>
+                        </details>
+
+                        <details class="app-list-item">
+                            <summary>
+                                <img src="buggies.png" class="app-list-icon" alt="Buggiess Icon">
+                                <span class="app-list-title">02: Buggiess</span>
+                                <span class="app-list-toggle"></span>
+                            </summary>
+                            <div class="app-list-content">
+                                <img src="buggies.png" class="apple-icon" alt="Buggiess Full App Icon">
+                                
+                                <p class="work-desc">
+                                    Buggiess is a gamified app created after an intense research and testing phase about Entomophobia (fear of insects), it's aimed for children to gradually familiarise them with insects' anatomies with the intention of gradual exposure therapy to help them avoid developing Entomophobia as a grown up. Designed all the assets including the characters, the UI/UX, flow, animated and interactive 3d models, AR experience of all the insects, promotional posters, app icon and screens for App Store.<br><br>
+                                    <a href="https://apps.apple.com/it/app/buggiess/id6759716697" target="_blank" class="store-link">[Link to App Store]</a>
+                                </p>
+                                <video src="buggiess1.mov" autoplay loop muted playsinline></video>
+                                <p class="work-desc">Selection from the three insects (Moth, Cockroach & Praying Mantis) turned into interactive playable characters (hand drawn)</p>
+                                <video src="buggiess2.mp4" autoplay loop muted playsinline></video>
+                                <p class="work-desc">The 3d model + animation of the realistic praying mantis</p>
+                                <video src="RICKY.mp4" autoplay loop muted playsinline></video>
+                                <p class="work-desc">AR experience showing interactive animated 3d model of cockroach in real time</p>
+                                <img src="characters.png" alt="The characters">
+                                <img src="poster.png" alt="Promotional posters">
+                                <img src="process1.jpg" alt="Process 1">
+                                <img src="process2.jpg" alt="Process 2">
+                                <img src="process3.jpg" alt="Process 3">
+                                <p class="work-desc">Process/brainstorming/sketches</p>
+                            </div>
+                        </details>
                         
-                                Testing of 3d map and AR of lava within the app<br><br><br>
-                        </p>
-                    </div>
-                    
-                    <br><br>
-                    <div class="work-item">
-                        <h4 class="work-title">02: Buggiess</h4>
-                        <img src="buggies.png" alt="Challenge 1 Showcase" class="apple-icon"><br>
-                            <p class="work-desc">
-                                Buggiess is a gamified app created after an intense research and testing phase about Entomophobia (fear of insects), it's aimed for children to gradually familiarise them with insects' anatomies with the intention of gradual exposure therapy to help them avoid developing Entomophobia as a grown up.
-                                Designed all the assets including the characters, the UI/UX, flow, animated and interactive 3d models, AR experience of all the insects, promotional posters, app icon and screens for App Store.<br>
-                                <a href="https://apps.apple.com/it/app/buggiess/id6759716697" target="_blank" class="store-link">[Link to App Store]</a><br>
-                                <br>
-                        <video src="buggiess1.mov" autoplay loop muted playsinline></video>
-                            
-                            Selection from the three insects (Moth, Cockroach & Praying Mantis) turned into interactive playable characters
-                            (hand drawn)
-                            <br><br><br>
-                        <video src="buggiess2.mp4" autoplay loop muted playsinline></video>
-                        The 3d model + animation of the realistic praying mantis<br><br><br>
-                        <video src="RICKY.mp4" autoplay loop muted playsinline></video>
-                        AR experience showing interactive animated 3d model of cockroach in real time <br><br><br>
-                        <img src="characters.png" alt="Challenge 1 Showcase"><br>
-                                    The characters!<br><br><br>
-                                    <img src="poster.png" alt="Challenge 1 Showcase">
-                                        
-                                            Promotional posters!<br><br><br>
-                                            <img src="process1.jpg" alt="Challenge 1 Showcase">
-                                                <img src="process2.jpg" alt="Challenge 1 Showcase">
-                                                    <img src="process3.jpg" alt="Challenge 1 Showcase">
-                                                    Process/brainstorming/sketches<br><br><br>
-                        </p>
-                    </div>
-                    
-                    <div class="work-item">
-                        <h4 class="work-title">03: Fight-Ink! Game</h4>
-                        <img src="icon.png" alt="Challenge 1 Showcase" class="apple-icon">
-                            <p class="work-desc">
-                                This game was born from an experimental and a silly idea where the protagonist's world is the top of an office table where he was born accidentally as an ink blot and his enemies are an eraser, a ball of pins and a stapler.
-                                <br><a href="https://github.com/alimurtazx/Fight-Ink-Game" target="_blank" class="store-link">[Github Link]</a>
-                                <br><br><br>
+                        <details class="app-list-item">
+                            <summary>
+                                <img src="icon.png" class="app-list-icon" alt="Fight Ink Icon">
+                                <span class="app-list-title">03: Fight-Ink! Game</span>
+                                <span class="app-list-toggle"></span>
+                            </summary>
+                            <div class="app-list-content">
+                                <img src="icon.png" class="apple-icon" alt="Fight Ink Full App Icon">
+                                
+                                <p class="work-desc">
+                                    This game was born from an experimental and a silly idea where the protagonist's world is the top of an office table where he was born accidentally as an ink blot and his enemies are an eraser, a ball of pins and a stapler.<br><br>
+                                    <a href="https://github.com/alimurtazx/Fight-Ink-Game" target="_blank" class="store-link">[Github Link]</a>
+                                </p>
                                 <video src="FightInk.mov" autoplay loop muted playsinline></video>
-                                This was an interesting moment in the process of designing this game!<br><br><br>
-                                <img src="hero.png" alt="Challenge 1 Showcase">
-                                    The hero! <br><br>
-                                    <img src="enemies.png" alt="Challenge 1 Showcase">
-                                        The Enemies!<br><br>
-                                    <img src="weapons.png" alt="Challenge 1 Showcase">
-                                        The Attacks!<br><br>
-                                    
-                       
-                        
-                        </p>
-                    </div>
-                    <div class="work-item">
-                        <h4 class="work-title">04: Planet Buddy!</h4>
-                        <img src="challenge1.png" alt="Challenge 1 Showcase" class="apple-icon">
-                        
-                        <p class="work-desc">
-                        For the first challenge of the Apple Developer Academy, we aimed to create a gamified learning experience for children to help them learn some basic facts about the most popular animals from each continent. I made 3d low-poly models of the animals and a 3d model of the globe.
-                        <br><a href="https://github.com/alimurtazx/Planet-Buddy" target="_blank" class="store-link">[Github Link]</a><br>
-                        <br>
-                            <img src="planet.png" alt="Challenge 1 Showcase">
-                                 <br><br>
-                        </p>
-                    </div>
-                    
-                </div>
+                                <p class="work-desc">This was an interesting moment in the process of designing this game!</p>
+                                <img src="hero.png" alt="The hero">
+                                <p class="work-desc">The hero!</p>
+                                <img src="enemies.png" alt="The Enemies">
+                                <p class="work-desc">The Enemies!</p>
+                                <img src="weapons.png" alt="The Attacks">
+                                <p class="work-desc">The Attacks!</p>
+                            </div>
+                        </details>
+
+                        <details class="app-list-item">
+                            <summary>
+                                <img src="challenge1.png" class="app-list-icon" alt="Planet Buddy Icon">
+                                <span class="app-list-title">04: Planet Buddy!</span>
+                                <span class="app-list-toggle"></span>
+                            </summary>
+                            <div class="app-list-content">
+                                <img src="challenge1.png" class="apple-icon" alt="Planet Buddy Full App Icon">
+                                
+                                <p class="work-desc">
+                                    For the first challenge of the Apple Developer Academy, we aimed to create a gamified learning experience for children to help them learn some basic facts about the most popular animals from each continent. I made 3d low-poly models of the animals and a 3d model of the globe.<br><br>
+                                    <a href="https://github.com/alimurtazx/Planet-Buddy" target="_blank" class="store-link">[Github Link]</a>
+                                </p>
+                                <img src="planet.png" alt="Planet Buddy Showcase">
+                            </div>
+                        </details>
+                    </div> </div>
                 <div class="ipod-body">
                     <div class="face front">
                         <div class="ipod-screen">
@@ -399,17 +434,17 @@
             
             <div class="media-card" data-fulltext="Creating optimized AR & 3d interactive experiences and environments with Blender through a technical lens.">
                 <div class="gallery-assets" style="display: none;">
-                    <div class="work-item">
+                    <div class="project-box">
                         <h4 class="work-title">WWF Astroni Oasis, Napoli</h4>
                         <video src="3D Map Astroni.mp4" autoplay loop muted playsinline></video>
                         <p class="work-desc">Created a 3D model using Blender for a project under WWF, modeling the 'Astroni Oasis' for the final challenge at the Apple Developer Academy.</p>
                     </div>
-                    <div class="work-item">
+                    <div class="project-box">
                         <h4 class="work-title">Topology & Wireframe</h4>
                         <img src="map wireframe.png" alt="Wireframe view">
                         <p class="work-desc">A breakdown of the structure before texturing.</p>
                     </div>
-                    <div class="work-item">
+                    <div class="project-box">
                         <h4 class="work-title">The floor is literally lava</h4>
                         <video src="lava.mp4" autoplay loop muted playsinline></video>
                         <p class="work-desc">Created this 3D Animation in Blender for the same project to enhance the user experience.</p>
@@ -436,19 +471,20 @@
 
             <div class="media-card" data-fulltext="A selected collection of my practice of paintings, performances and installations.">
                 <div class="gallery-assets" style="display: none;">
-                    <div class="work-item">
+                    <div class="project-box">
                         <h4 class="work-title">Paintings on Canvas</h4>
-                        <img src="paint.001.png" alt="paintings">'Immovable movable objects', oil on MDF, 121x76cm, 2024<br><br><br><br><br><br><br>
-                            <img src="paint.002.png" alt="paintings">'Angels on Fire, Devil on Grass’, acrylics and pastels on canvas, 182x121cm, 2024<br><br><br><br><br><br><br>
-                                <img src="paint.003.png" alt="paintings"><br><br><br><br><br><br><br>
-                                    <img src="paint.004.png" alt="paintings"><br><br><br><br><br><br><br>
-                                        <img src="paint.005.png" alt="paintings"><br><br><br><br><br><br><br>
-                                            <img src="paint.006.png" alt="paintings"><br><br><br><br><br><br><br>
-                                                <img src="paint.007.png" alt="paintings"><br><br><br><br><br><br><br>
-                                                    <img src="paint.008.png" alt="paintings"><br><br>
+                        <img src="paint.001.png" alt="paintings">
+                        <p class="work-desc">'Immovable movable objects', oil on MDF, 121x76cm, 2024</p>
                         
-                    </div>
-                    <div
+                        <img src="paint.002.png" alt="paintings">
+                        <p class="work-desc">'Angels on Fire, Devil on Grass’, acrylics and pastels on canvas, 182x121cm, 2024</p>
+                        
+                        <img src="paint.003.png" alt="paintings">
+                        <img src="paint.004.png" alt="paintings">
+                        <img src="paint.005.png" alt="paintings">
+                        <img src="paint.006.png" alt="paintings">
+                        <img src="paint.007.png" alt="paintings">
+                        <img src="paint.008.png" alt="paintings">
                         <p class="work-desc">Physical media explorations bridging conceptual contemporary states with raw expressive art.</p>
                     </div>
                 </div>
@@ -473,10 +509,10 @@
 
             <div class="media-card" data-fulltext="The foundational work. Sketchbook archives, UI concepts, typography styling, and the iterative workflows that inform both my digital execution and traditional painting techniques.">
                 <div class="gallery-assets" style="display: none;">
-                    <div class="work-item">
+                    <div class="project-box">
                         <h4 class="work-title">Process Work</h4>
                         <img src="process-1.png" alt="process">
-                            <img src="process-2.png" alt="process">
+                        <img src="process-2.png" alt="process">
                         <p class="work-desc"> In process!</p>
                     </div>
                     
@@ -610,7 +646,6 @@
                 const galleryElement = card.querySelector('.gallery-assets');
                 const mediaHTML = galleryElement ? galleryElement.innerHTML : card.querySelector('.image-container').innerHTML;
 
-                // Check if it's the Profile card
                 if (title === 'PROFILE') {
                     modalTitle.innerText = "ALI MURTAZA NAZAR.EXE";
                 } else {
